@@ -1,0 +1,179 @@
+- node: Sites
+  children:
+  - node: http://localhost:8080
+    url: http://localhost:8080
+    method: GET
+    children:
+    - node: api
+      url: http://localhost:8080/api
+      method: GET
+      children:
+      - node: accounts
+        url: http://localhost:8080/api/accounts
+        method: GET
+        children:
+        - node: GET:me
+          url: http://localhost:8080/api/accounts/me
+          method: GET
+          responseLength: 570
+          statusCode: 200
+      - node: auth
+        url: http://localhost:8080/api/auth
+        method: GET
+        children:
+        - node: "POST:login()({password,email})"
+          url: http://localhost:8080/api/auth/login
+          method: POST
+          responseLength: 677
+          statusCode: 200
+          data: '%7B%0D%0A++++%22password%22%3A+%22Stefano_Strong_88%22%2C%0D%0A++++%22email%22%3A+%22stefano.bruni%40libero.it%22%0D%0A%7D='
+        - node: "POST:register()({password,email,initialDeposit,firstName,lastName,nationality,birthday,birthPlace,idCardNumber,taxId})"
+          url: http://localhost:8080/api/auth/register
+          method: POST
+          responseLength: 235
+          statusCode: 200
+          data: '%7B%0D%0A++++%22password%22%3A+%22Stefano_Strong_88%22%2C%0D%0A++++%22email%22%3A+%22stefano.bruni%40libero.it%22%2C%0D%0A++++%22initialDeposit%22%3A+890.00%2C%0D%0A++++%22firstName%22%3A+%22Stefano%22%2C%0D%0A++++%22lastName%22%3A+%22Bruni%22%2C%0D%0A++++%22nationality%22%3A+%22Italiana%22%2C%0D%0A++++%22birthday%22%3A+%221988-09-05%22%2C%0D%0A++++%22birthPlace%22%3A+%22Torino%22%2C%0D%0A++++%22idCardNumber%22%3A+%22ZZ11223EE%22%2C%0D%0A++++%22taxId%22%3A+%22BRNSFN88P05L219C%22%0D%0A++%7D='
+      - node: GET:beneficiaries
+        url: http://localhost:8080/api/beneficiaries
+        method: GET
+        responseLength: 578
+        statusCode: 200
+      - node: beneficiaries
+        url: http://localhost:8080/api/beneficiaries
+        method: GET
+        children:
+        - node: DELETE:1
+          url: http://localhost:8080/api/beneficiaries/1
+          method: DELETE
+          responseLength: 362
+          statusCode: 204
+      - node: "POST:beneficiaries()({firstName,lastName,iban})"
+        url: http://localhost:8080/api/beneficiaries
+        method: POST
+        responseLength: 576
+        statusCode: 200
+        data: '%7B%0D%0A++++%22firstName%22%3A+%22Silvia%22%2C%0D%0A++++%22lastName%22%3A+%22Rizzo%22%2C%0D%0A++++%22iban%22%3A+%22ITDB70F725C5554D88A6B0B5%22%0D%0A%7D='
+      - node: GET:cards
+        url: http://localhost:8080/api/cards
+        method: GET
+        responseLength: 670
+        statusCode: 200
+      - node: cards
+        url: http://localhost:8080/api/cards
+        method: GET
+        children:
+        - node: 5
+          url: http://localhost:8080/api/cards/5
+          method: GET
+          children:
+          - node: PUT:freeze
+            url: http://localhost:8080/api/cards/5/freeze
+            method: PUT
+            responseLength: 536
+            statusCode: 200
+          - node: PUT:unfreeze
+            url: http://localhost:8080/api/cards/5/unfreeze
+            method: PUT
+            responseLength: 537
+            statusCode: 200
+      - node: "POST:cards()({type,network})"
+        url: http://localhost:8080/api/cards
+        method: POST
+        responseLength: 545
+        statusCode: 200
+        data: '%7B%0D%0A++++%22type%22%3A+%22CREDIT%22%2C%0D%0A++++%22network%22%3A+%221%22%0D%0A%7D='
+      - node: GET:login-history
+        url: http://localhost:8080/api/login-history
+        method: GET
+        responseLength: 491
+        statusCode: 200
+      - node: phone-topups
+        url: http://localhost:8080/api/phone-topups
+        method: GET
+        children:
+        - node: "GET:contacts()({\r\n    \"phoneNumber\": \"3331239990\",\r\n   ...)"
+          url: http://localhost:8080/api/phone-topups/contacts
+          method: GET
+          responseLength: 486
+          statusCode: 200
+      - node: "POST:phone-topups()({phoneNumber,operator,amount,saveContact,contactName})"
+        url: http://localhost:8080/api/phone-topups
+        method: POST
+        responseLength: 381
+        statusCode: 200
+        data: '%7B%0D%0A++++%22phoneNumber%22%3A+%223331239990%22%2C%0D%0A++++%22operator%22%3A+%22TIM%22%2C%0D%0A++++%22amount%22%3A+50%2C%0D%0A++++%22saveContact%22%3A+%22true%22%2C%0D%0A++++%22contactName%22%3A+%22John+Doe%22%0D%0A%7D='
+      - node: savings-goals
+        url: http://localhost:8080/api/savings-goals
+        method: GET
+        children:
+        - node: 1
+          url: http://localhost:8080/api/savings-goals/1
+          method: GET
+          children:
+          - node: "POST:deposit()({name,targetAmount,amount})"
+            url: http://localhost:8080/api/savings-goals/1/deposit
+            method: POST
+            responseLength: 381
+            statusCode: 200
+            data: '%7B%0D%0A++++%22name%22%3A+%22Savings+Goal+for+Vacation%22%2C%0D%0A++++%22targetAmount%22%3A+5000%2C%0D%0A++++%22amount%22%3A+100%0D%0A%7D='
+          - node: "POST:withdraw()({name,targetAmount,amount})"
+            url: http://localhost:8080/api/savings-goals/1/withdraw
+            method: POST
+            responseLength: 381
+            statusCode: 200
+            data: '%7B%0D%0A++++%22name%22%3A+%22Savings+Goal+for+Vacation%22%2C%0D%0A++++%22targetAmount%22%3A+5000%2C%0D%0A++++%22amount%22%3A+50%0D%0A%7D='
+        - node: DELETE:1
+          url: http://localhost:8080/api/savings-goals/1
+          method: DELETE
+          responseLength: 381
+          statusCode: 200
+      - node: "GET:savings-goals()({\r\n    \"name\": \"Savings Goal for Vacatio...)"
+        url: http://localhost:8080/api/savings-goals
+        method: GET
+        responseLength: 503
+        statusCode: 200
+      - node: "POST:savings-goals()({name,targetAmount,amount})"
+        url: http://localhost:8080/api/savings-goals
+        method: POST
+        responseLength: 495
+        statusCode: 200
+        data: '%7B%0D%0A++++%22name%22%3A+%22Savings+Goal+for+Vacation%22%2C%0D%0A++++%22targetAmount%22%3A+5000%2C%0D%0A++++%22amount%22%3A+100%0D%0A%7D='
+      - node: GET:transactions
+        url: http://localhost:8080/api/transactions
+        method: GET
+        responseLength: 1611
+        statusCode: 200
+      - node: transactions
+        url: http://localhost:8080/api/transactions
+        method: GET
+        children:
+        - node: "POST:pay-bill()({amount,billerName,billReferenceNumber,description,category})"
+          url: http://localhost:8080/api/transactions/pay-bill
+          method: POST
+          responseLength: 663
+          statusCode: 200
+          data: '%7B%0D%0A++++%22amount%22%3A+250%2C%0D%0A++++%22billerName%22%3A+%22ENEL%22%2C%0D%0A++++%22billReferenceNumber%22%3A+%221234567890%22%2C%0D%0A++++%22description%22%3A+%22Payment+for+electricity+bill%22%2C%0D%0A++++%22category%22%3A+1%0D%0A%7D='
+        - node: "POST:transfer()({amount,type,relatedAccountNumber,description,recipientFirstName,recipientLastName})"
+          url: http://localhost:8080/api/transactions/transfer
+          method: POST
+          responseLength: 652
+          statusCode: 200
+          data: '%7B%0D%0A++++%22amount%22%3A+%22100%22%2C%0D%0A++++%22type%22%3A+%22OUT%22%2C%0D%0A++++%22relatedAccountNumber%22%3A+%22ITDB70F725C5554D88A6B0B5%22%2C%0D%0A++++%22description%22%3A+%22prova+via+postman%22%2C%0D%0A++++%22recipientFirstName%22%3A+%22Silvia%22%2C%0D%0A++++%22recipientLastName%22%3A+%22Rizzo%22%0D%0A%7D='
+      - node: users
+        url: http://localhost:8080/api/users
+        method: GET
+        children:
+        - node: GET:me
+          url: http://localhost:8080/api/users/me
+          method: GET
+          responseLength: 623
+          statusCode: 200
+        - node: me
+          url: http://localhost:8080/api/users/me
+          method: GET
+          children:
+          - node: "PUT:password()({oldPassword,newPassword})"
+            url: http://localhost:8080/api/users/me/password
+            method: PUT
+            responseLength: 460
+            statusCode: 200

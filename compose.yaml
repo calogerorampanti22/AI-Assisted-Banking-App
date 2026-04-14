@@ -1,0 +1,76 @@
+services:
+  # FRONTEND (React + Nginx)
+  frontend:
+    build:
+      context: ./bank-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  # BACKEND
+  backend:
+    env_file: ".env"
+    build:
+      context: ./bank-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  # DATABASE (MySQL)
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: bank
+    env_file: ".env"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 10
+
+  # SONARQUBE
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+
+  dependency-check:
+    image: owasp/dependency-check:latest
+    volumes:
+      - .:/src
+      - ./odc-reports:/report
+      - odc-data:/usr/share/dependency-check/data
+    entrypoint:
+      - /usr/share/dependency-check/bin/dependency-check.sh
+      - --scan
+      - /src
+      - --format
+      - HTML
+      - --out
+      - /report
+      - --project
+      - "bank-frontend"
+      - --enableRetired
+      - --nvdApiKey
+      - ${NVD_API_KEY}
+
+volumes:
+  db-data:
+  odc-data:
+
+
+networks:
+  sonarnet:

@@ -1,0 +1,4 @@
+Got token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlcjMiLCJpYXQiOjE3NzI1NTA5NDUsImV4cCI6MTc3MjYzNzM0NX0.-3GazHL6HNYSRLogEWw8Ij2iNRhRLyxIXLjU_PTmxUQkFONkBAPWFjMqRHl2jMQg
+Fetching cards...
+Got cards, toggling first card: 7
+Error during request: http://localhost:8080/api/cards/7/freeze  401

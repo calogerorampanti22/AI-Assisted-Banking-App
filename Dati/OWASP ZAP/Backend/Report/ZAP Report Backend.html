@@ -1,0 +1,2846 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Report ZAP Backend</title>
+<link href="2026-03-25-ZAP-Report-localhost/common.css"
+	rel="stylesheet" type="text/css">
+<link href="2026-03-25-ZAP-Report-localhost/console.css" rel="stylesheet" type="text/css">
+<script src="2026-03-25-ZAP-Report-localhost/chart.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function showHide(id) {
+        showHideElement(id + "reqh");
+        showHideElement(id + "reqb");
+        showHideElement(id + "resph");
+        showHideElement(id + "respb");
+    }
+    function showHideElement(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+<link rel="stylesheet" href="2026-03-25-ZAP-Report-localhost/chart.min.css">
+</head>
+<body>
+
+	
+		<div class="hero"></div>
+	
+
+	<header id="header">
+		<div class="wrap">
+			<div class="inner">
+				<h1>
+					<!-- The ZAP Logo -->
+					<img src="2026-03-25-ZAP-Report-localhost/zap32x32.png" alt="ZAP" />
+					Report ZAP Backend
+				</h1>
+			</div>
+		</div>
+	</header>
+
+	<section id="segment-01" class="container">
+		<div class="wrap">
+			<div class="inner pt3">
+
+				
+
+				<h3>
+					Generated on mer, 25 mar 2026 17:45:24
+				</h3>
+
+				<h3>
+					ZAP Version: 2.17.0
+				</h3>
+
+				<h4>
+					ZAP by <a href="https://checkmarx.com/">Checkmarx</a>
+				</h4>
+
+				
+					<!--  Hidden divs just to allow us to get hold of the right CSS colors -->
+					<div class="risk-3-chart" style="display: none;"></div>
+					<div class="risk-2-chart" style="display: none;"></div>
+					<div class="risk-1-chart" style="display: none;"></div>
+					<div class="risk-0-chart" style="display: none;"></div>
+					<div class="chart-text-color" style="display: none;"></div>
+
+					<div class="summaryChartWrapper">
+						<canvas id="summaryChart" width="550" height="300"></canvas>
+						<script type="text/javascript">
+                            /*<![CDATA[*/
+                            var title = "Alert Chart";
+                            var labels = [
+                            "Alto",
+                            "Medio",
+                            "Basso",
+                            "Informativo"];
+                            var data = [
+                            1,
+                            null,
+                            2,
+                            3];
+                            /*]]>*/
+
+                            const fontColor = getComputedStyle(document
+                                    .querySelector('.chart-text-color')).color;
+
+                            var options = {
+                                responsive : true,
+                                legend : {
+                                    position : 'bottom',
+                                    labels : {
+                                        fontColor : fontColor,
+                                        padding : 30
+                                    }
+                                }
+                            }
+
+                            const chartHigh = getComputedStyle(document
+                                    .querySelector('.risk-3-chart')).backgroundColor;
+                            const chartMed = getComputedStyle(document
+                                    .querySelector('.risk-2-chart')).backgroundColor;
+                            const chartLow = getComputedStyle(document
+                                    .querySelector('.risk-1-chart')).backgroundColor;
+                            const chartInfo = getComputedStyle(document
+                                    .querySelector('.risk-0-chart')).backgroundColor;
+
+                            new Chart(document.getElementById("summaryChart"),
+                                    {
+                                        type : "doughnut",
+                                        data : {
+                                            labels : labels,
+                                            datasets : [ {
+                                                label : title,
+                                                data : data,
+                                                fill : false,
+                                                backgroundColor : [ chartHigh,
+                                                        chartMed, chartLow,
+                                                        chartInfo ],
+                                                borderWidth : 0
+                                            } ]
+                                        },
+                                        options : options
+                                    });
+                        </script>
+					</div>
+				
+
+				
+					<h3 class="left-header">Summary of Alerts</h3>
+					<div class="tableWrapper">
+						<table class="summary" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="45%"
+									height="24">Livello di Rischio</th>
+								<th width="55%"
+									align="center">Number of Alerts</th>
+							</tr>
+							<tr>
+								<td class="risk-3">
+									<div>Alto</div>
+								</td>
+								<td align="center">
+									<div>1</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="risk-2">
+									<div>Medio</div>
+								</td>
+								<td align="center">
+									<div>0</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="risk-1">
+									<div>Basso</div>
+								</td>
+								<td align="center">
+									<div>2</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="risk-0">
+									<div>Informativo</div>
+								</td>
+								<td align="center">
+									<div>3</div>
+								</td>
+							</tr>
+							
+						</table>
+					</div>
+					<div class="spacer-lg"></div>
+				
+
+			</div>
+		</div>
+	</section>
+
+	
+	
+	
+		<div></div>
+	
+
+	<section id="segment-02" class="container">
+		<div class="wrap">
+			<div class="inner">
+
+				
+					<h3>Insights</h3>
+					<div class="tableWrapper">
+						<table class="insights" cellspacing="0" cellpadding="0">
+							<tr>
+								<th height="24">Level</th>
+								<th>Reason</th>
+								<th>Site</th>
+								<th>Description</th>
+								<th>Statistic</th>
+							</tr>
+							
+						</table>
+					</div>
+					<div class="spacer-lg"></div>
+				
+
+				
+					<h3>Avvisi</h3>
+					<div class="tableWrapper">
+						<table class="alerts" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="60%" height="24">Nome</th>
+								<th width="20%"
+									align="center">Livello di Rischio</th>
+								<th width="20%"
+									align="center">Number of Instances</th>
+							</tr>
+							<tr>
+								<td><a href="#plugin-40018">SQL Injection</a></td>
+								<td align="center" class="risk-3">Alto</td>
+								
+								
+									<td align="center">1</td>
+								
+							</tr>
+							<tr>
+								<td><a href="#plugin-2">Private IP Disclosure</a></td>
+								<td align="center" class="risk-1">Basso</td>
+								
+								
+									<td align="center">1</td>
+								
+							</tr>
+							<tr>
+								<td><a href="#plugin-10021">X-Content-Type-Options Header Missing</a></td>
+								<td align="center" class="risk-1">Basso</td>
+								
+								
+									<td align="center">1</td>
+								
+							</tr>
+							<tr>
+								<td><a href="#plugin-10111">Authentication Request Identified</a></td>
+								<td align="center" class="risk-0">Informativo</td>
+								
+								
+									<td align="center">1</td>
+								
+							</tr>
+							<tr>
+								<td><a href="#plugin-10027">Information Disclosure - Suspicious Comments</a></td>
+								<td align="center" class="risk-0">Informativo</td>
+								
+								
+									<td align="center">1</td>
+								
+							</tr>
+							<tr>
+								<td><a href="#plugin-10112">Session Management Response Identified</a></td>
+								<td align="center" class="risk-0">Informativo</td>
+								
+								
+									<td align="center">1</td>
+								
+							</tr>
+						</table>
+					</div>
+				
+
+			</div>
+		</div>
+	</section>
+
+	<section id="segment-03" class="container">
+		<div class="wrap">
+			<div class="inner">
+
+				
+					<h3>Passing Rules</h3>
+					<div class="tableWrapper">
+						<table class="alerts" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="55%" height="24">Nome</th>
+								<th width="15%"
+									align="center">Rule Type</th>
+								<th width="15%"
+									align="center">Threshold</th>
+								<th width="15%"
+									align="center">Strength</th>
+							</tr>
+							
+							
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10113/">Verification Request Identified</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/3/">Session ID in URL Rewrite</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10115/">Script Served From Malicious Domain (polyfill)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10116/">ZAP is Out of Date</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90001/">JSF ViewState non sicuro</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90003/">Sub Resource Integrity Attribute Missing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10003/">Libreria JS Vulnerabile (Sviluppata da Retire.js)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90002/">Java Serialization Object</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10009/">In Page Banner Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90011/">Mancata corrispondenza CharSet</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10010/">Cookie No HttpOnly Flag</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10011/">Cookie Without Secure Flag</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10015/">Re-examine Cache-control Directives</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10017/">Cross-Domain JavaScript Source File Inclusion</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10019/">Content-Type Header Missing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10020/">Anti-clickjacking Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90022/">Application Error Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10023/">Information Disclosure - Debug Error Messages</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10024/">Information Disclosure - Sensitive Information in URL</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10025/">Information Disclosure - Sensitive Information in HTTP Referrer Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10028/">Off-site Redirect</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10029/">Cookie Poisoning</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10030/">User Controllable Charset</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90030/">WSDL File Detection</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10031/">User Controllable HTML Element Attribute (Potential XSS)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90033/">Cookie con ambito non stringente</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10032/">Viewstate</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10033/">Directory Browsing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10034/">Heartbleed OpenSSL Vulnerability (Indicative)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10035/">Strict-Transport-Security Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10036/">HTTP Server Response Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10037/">Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10038/">Content Security Policy (CSP) Header Not Set</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10039/">X-Backend-Server Header Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10040/">Secure Pages Include Mixed Content</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10041/">HTTP to HTTPS Insecure Transition in Form Post</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10042/">HTTPS to HTTP Insecure Transition in Form Post</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10043/">User Controllable JavaScript Event (XSS)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10044/">Big Redirect Detected (Potential Sensitive Information Leak)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10050/">Retrieved from Cache</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10052/">X-ChromeLogger-Data (XCOLD) Header Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10054/">Cookie without SameSite Attribute</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10055/">CSP</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10056/">X-Debug-Token Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10057/">Username Hash Found</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10061/">X-AspNet-Version Response Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10062/">PII Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/50001/">Regole di script per la scansione passiva</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/50003/">Statistiche della regola di scansione passiva</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10202/">Assenza di Token Anti-CSRF</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10096/">Timestamp Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10097/">Hash Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10098/">Configurazione errata multi dominio</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10105/">Metodo di Autenticazione Debole</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10108/">Reverse Tabnabbing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10109/">Modern Web Application</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+							
+						</table>
+					</div>
+				
+
+			</div>
+		</div>
+	</section>
+
+	<section id="segment-04" class="container">
+		<div class="wrap">
+			<div class="inner">
+
+				<h2>Siti</h2>
+				
+					<h3>http://localhost:8080</h3>
+					
+						<div class="tableWrapper">
+							<table class="summary" cellspacing="0" cellpadding="0">
+								<tr>
+									<th width="45%" height="24">HTTP Response Code</th>
+									<th width="55%" align="center">Number of Responses</th>
+								</tr>
+
+								
+							</table>
+						</div>
+
+						<h4>No Authentication Statistics Found</h4>
+						<div class="tableWrapper">
+							
+						</div>
+					
+					
+					
+						<div class="tableWrapper">
+							<table class="summary" cellspacing="0" cellpadding="0">
+								<tr>
+									<th>Parameter Name</th>
+									<th>Type</th>
+									<th>Flags</th>
+									<th>Times Used</th>
+									<th># Values</th>
+								</tr>
+								
+									<tr>
+										<td>
+											<div>Allow</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>11</div>
+										</td>
+										<td>
+											<div>2</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Cache-Control</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>59</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Connection</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>50</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Content-Length</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>34</div>
+										</td>
+										<td>
+											<div>2</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Content-Type</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>28</div>
+										</td>
+										<td>
+											<div>2</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Date</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>61</div>
+										</td>
+										<td>
+											<div>61</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Expires</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>59</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Keep-Alive</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>50</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Pragma</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>59</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Vary</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>183</div>
+										</td>
+										<td>
+											<div>3</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>X-Content-Type-Options</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>59</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>X-Frame-Options</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>59</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>X-XSS-Protection</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>59</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>content-length</div>
+										</td>
+										<td>
+											<div>Intestazione</div>
+										</td>
+										<td>
+												<div></div>
+											</td>
+										<td>
+											<div>26</div>
+										</td>
+										<td>
+											<div>22</div>
+										</td>
+									</tr>
+								
+
+							</table>
+						</div>
+					
+				
+
+				
+					<h3>Alert Detail</h3>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-3"><a
+										id="plugin-40018"></a>
+										<div>Alto</div></th>
+									<th class="risk-3">SQL Injection</th>
+								</tr>
+								<tr>
+									<td width="20%">Descrizione</td>
+									<td width="80%">
+											<div>SQL injection may be possible.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:8080/api/savings-goals">http://localhost:8080/api/savings-goals</a></td>
+									</tr>
+									
+										<tr>
+											<td width="20%"
+												class="indent2">Node Name</td>
+											<td width="80%">http://localhost:8080/api/savings-goals ()({
+    &quot;name&quot;: &quot;Savings Goal for Vacatio...)</td>
+										</tr>
+									
+									<tr>
+										<td width="20%"
+											class="indent2">Metodo</td>
+										<td width="80%">GET</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attacco</td>
+										<td width="80%">{
+    &quot;name&quot;: &quot;Savings Goal for Vacation&quot;,
+    &quot;targetAmount&quot;: 5000,
+    &quot;amount&quot;: 100
+} AND 1=1 -- </td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-9">
+												<a
+													onclick="showHide(&#39;alert-9&#39;);"
+													href="#9">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della richiesta
+											- size: 525 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-9reqh"
+												style="display: none;">
+												
+													GET http://localhost:8080/api/savings-goals HTTP/1.1
+													<br />
+												
+													Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdGVmYW5vLmJydW5pQGxpYmVyby5pdCIsImlhdCI6MTc3MzkzMjEwNywiZXhwIjoxNzc0MDE4NTA3fQ.YxUg6Dp4kmgIWUOz1LPzSaP8pgZw6OG2gKYvx3PilXchFmClEptOIpea1iPgO-kj
+													<br />
+												
+													Content-Type: text/plain
+													<br />
+												
+													User-Agent: PostmanRuntime/7.52.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1b689018-b034-419b-8aea-b6adbe17cab5
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													content-length: 104
+													<br />
+												
+													Referer: http://localhost:8080/api/savings-goals
+													<br />
+												
+													host: localhost:8080
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della richiesta
+											- size: 104 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-9reqb"
+												style="display: none;">
+												
+													{
+													<br />
+												
+													    &quot;name&quot;: &quot;Savings Goal for Vacation&quot;,
+													<br />
+												
+													    &quot;targetAmount&quot;: 5000,
+													<br />
+												
+													    &quot;amount&quot;: 100
+													<br />
+												
+													} AND 1=1 -- 
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della risposta
+											- size: 414 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-9resph"
+												style="display: none;">
+												
+													HTTP/1.1 200
+													<br />
+												
+													Vary: Origin
+													<br />
+												
+													Vary: Access-Control-Request-Method
+													<br />
+												
+													Vary: Access-Control-Request-Headers
+													<br />
+												
+													X-Content-Type-Options: nosniff
+													<br />
+												
+													X-XSS-Protection: 0
+													<br />
+												
+													Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+													<br />
+												
+													Pragma: no-cache
+													<br />
+												
+													Expires: 0
+													<br />
+												
+													X-Frame-Options: DENY
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Date: Thu, 19 Mar 2026 16:24:53 GMT
+													<br />
+												
+													Keep-Alive: timeout=60
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													content-length: 2940
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della risposta
+											- size: 2.940 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-9respb"
+												style="display: none;">
+												
+													[{&quot;name&quot;:&quot;http://www.google.com/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:2},{&quot;name&quot;:&quot;http://www.google.com:80/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:3},{&quot;name&quot;:&quot;http://www.google.com&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:4},{&quot;name&quot;:&quot;http://www.google.com/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:5},{&quot;name&quot;:&quot;http://www.google.com:80/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:6},{&quot;name&quot;:&quot;www.google.com/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:7},{&quot;name&quot;:&quot;www.google.com:80/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:8},{&quot;name&quot;:&quot;www.google.com&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:9},{&quot;name&quot;:&quot;www.google.com/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:10},{&quot;name&quot;:&quot;www.google.com:80/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:11},{&quot;name&quot;:&quot;5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:12},{&quot;name&quot;:&quot;https://5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:13},{&quot;name&quot;:&quot;https://5669053901664242087%2eowasp%2eorg&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:14},{&quot;name&quot;:&quot;5;URL=&#39;https://5669053901664242087.owasp.org&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:15},{&quot;name&quot;:&quot;URL=&#39;http://5669053901664242087.owasp.org&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:16},{&quot;name&quot;:&quot;https://5669053901664242087.owasp.org/?Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:17},{&quot;name&quot;:&quot;5;URL=&#39;https://5669053901664242087.owasp.org/?Savings Goal for Vacation&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:18},{&quot;name&quot;:&quot;https://\\5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:19},{&quot;name&quot;:&quot;http://\\5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:20},{&quot;name&quot;:&quot;&lt;!--#EXEC cmd=\&quot;ls /\&quot;--&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:21},{&quot;name&quot;:&quot;\&quot;&gt;&lt;!--#EXEC cmd=\&quot;ls /\&quot;--&gt;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:22},{&quot;name&quot;:&quot;&lt;!--#EXEC cmd=\&quot;dir \\\&quot;--&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:23},{&quot;name&quot;:&quot;\&quot;&gt;&lt;!--#EXEC cmd=\&quot;dir \\\&quot;--&gt;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:24},{&quot;name&quot;:&quot;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:25},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:26},{&quot;name&quot;:&quot;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:27},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:28},{&quot;name&quot;:&quot;;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:29},{&quot;name&quot;:&quot;Savings Goal for Vacation;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:30},{&quot;name&quot;:&quot;&#39;(&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:31},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;(&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:32},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:33}]
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									
+									
+										<td width="80%">1</td>
+									
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Do not trust client side input, even if there is client side validation in place.</div>
+											<br />
+										
+											<div>In general, type check all data on the server side.</div>
+											<br />
+										
+											<div>If the application uses JDBC, use PreparedStatement or CallableStatement, with parameters passed by &#39;?&#39;</div>
+											<br />
+										
+											<div>If the application uses ASP, use ADO Command Objects with strong type checking and parameterized queries.</div>
+											<br />
+										
+											<div>If database Stored Procedures can be used, use them.</div>
+											<br />
+										
+											<div>Do *not* concatenate strings into queries in the stored procedure, or use &#39;exec&#39;, &#39;exec immediate&#39;, or equivalent functionality!</div>
+											<br />
+										
+											<div>Do not create dynamic SQL queries using simple string concatenation.</div>
+											<br />
+										
+											<div>Escape all data received from the client.</div>
+											<br />
+										
+											<div>Apply an &#39;allow list&#39; of allowed characters, or a &#39;deny list&#39; of disallowed characters in user input.</div>
+											<br />
+										
+											<div>Apply the principle of least privilege by using the least privileged database user possible.</div>
+											<br />
+										
+											<div>In particular, avoid using the &#39;sa&#39; or &#39;db-owner&#39; database users. This does not eliminate SQL injection, but minimizes its impact.</div>
+											<br />
+										
+											<div>Grant the minimum database access that is necessary for the application.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Etichette</td>
+									<td width="80%">
+
+											
+											
+												POLICY_SEQUENCE
+											=
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/Top10/A03_2021-Injection/">OWASP_2021_A03</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://www.zaproxy.org/docs/desktop/addons/common-library/alerttags/#compliance">PCI_DSS</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/89.html">CWE-89</a>
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_QA_CICD
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_DEV_CICD
+											=
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_SQL_Injection">WSTG-v42-INPV-05</a>
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_API
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_DEV_FULL
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_QA_STD
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_QA_FULL
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_PENTEST
+											=
+											
+											
+											<br />
+										
+
+											
+												<a href="https://www.zaproxy.org/docs/desktop/addons/common-library/alerttags/#compliance">HIPAA</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection.html">OWASP_2017_A01</a>
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_DEV_STD
+											=
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/89.html">89</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">19</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/40018/">40018</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-1"><a
+										id="plugin-2"></a>
+										<div>Basso</div></th>
+									<th class="risk-1">Private IP Disclosure</th>
+								</tr>
+								<tr>
+									<td width="20%">Descrizione</td>
+									<td width="80%">
+											<div>A private IP (such as 10.x.x.x, 172.x.x.x, 192.168.x.x) or an Amazon EC2 private hostname (for example, ip-10-0-56-78) has been found in the HTTP response body. This information might be helpful for further attacks targeting internal systems.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:8080/api/login-history">http://localhost:8080/api/login-history</a></td>
+									</tr>
+									
+										<tr>
+											<td width="20%"
+												class="indent2">Node Name</td>
+											<td width="80%">http://localhost:8080/api/login-history</td>
+										</tr>
+									
+									<tr>
+										<td width="20%"
+											class="indent2">Metodo</td>
+										<td width="80%">GET</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attacco</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%">172.18.0.1</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-8">
+												<a
+													onclick="showHide(&#39;alert-8&#39;);"
+													href="#8">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della richiesta
+											- size: 478 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-8reqh"
+												style="display: none;">
+												
+													GET http://localhost:8080/api/login-history HTTP/1.1
+													<br />
+												
+													Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdGVmYW5vLmJydW5pQGxpYmVyby5pdCIsImlhdCI6MTc3MzkzMjEwNywiZXhwIjoxNzc0MDE4NTA3fQ.YxUg6Dp4kmgIWUOz1LPzSaP8pgZw6OG2gKYvx3PilXchFmClEptOIpea1iPgO-kj
+													<br />
+												
+													User-Agent: PostmanRuntime/7.52.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: a2c2bb81-efb7-42d7-9b80-10381dae10b4
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Referer: http://localhost:8080/api/login-history
+													<br />
+												
+													host: localhost:8080
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della richiesta
+											- size: 0 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-8reqb"
+												style="display: none;">
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della risposta
+											- size: 412 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-8resph"
+												style="display: none;">
+												
+													HTTP/1.1 200
+													<br />
+												
+													Vary: Origin
+													<br />
+												
+													Vary: Access-Control-Request-Method
+													<br />
+												
+													Vary: Access-Control-Request-Headers
+													<br />
+												
+													X-Content-Type-Options: nosniff
+													<br />
+												
+													X-XSS-Protection: 0
+													<br />
+												
+													Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+													<br />
+												
+													Pragma: no-cache
+													<br />
+												
+													Expires: 0
+													<br />
+												
+													X-Frame-Options: DENY
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Date: Thu, 19 Mar 2026 15:49:24 GMT
+													<br />
+												
+													Keep-Alive: timeout=60
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													content-length: 77
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della risposta
+											- size: 77 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-8respb"
+												style="display: none;">
+												
+													[{&quot;loginDate&quot;:&quot;2026-03-19T14:55:07.629866&quot;,&quot;ipAddress&quot;:&quot;172.18.0.1&quot;,&quot;id&quot;:10}]
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									
+									
+										<td width="80%">1</td>
+									
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Remove the private IP address from the HTTP response body. For comments, use JSP/ASP/PHP comment instead of HTML/JavaScript comment which can be seen by client browsers.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://datatracker.ietf.org/doc/html/rfc1918">https://datatracker.ietf.org/doc/html/rfc1918</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Etichette</td>
+									<td width="80%">
+
+											
+												<a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP_2021_A01</a>
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_QA_STD
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_PENTEST
+											=
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html">OWASP_2017_A03</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/497.html">CWE-497</a>
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/497.html">497</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">13</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/2/">2</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-1"><a
+										id="plugin-10021"></a>
+										<div>Basso</div></th>
+									<th class="risk-1">X-Content-Type-Options Header Missing</th>
+								</tr>
+								<tr>
+									<td width="20%">Descrizione</td>
+									<td width="80%">
+											<div>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to &#39;nosniff&#39;. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:8080/api/auth/register">http://localhost:8080/api/auth/register</a></td>
+									</tr>
+									
+										<tr>
+											<td width="20%"
+												class="indent2">Node Name</td>
+											<td width="80%">http://localhost:8080/api/auth/register ()({password,email,initialDeposit,firstName,lastName,nationality,birthday,birthPlace,idCardNumber,taxId})</td>
+										</tr>
+									
+									<tr>
+										<td width="20%"
+											class="indent2">Metodo</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">x-content-type-options</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attacco</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-5">
+												<a
+													onclick="showHide(&#39;alert-5&#39;);"
+													href="#5">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della richiesta
+											- size: 260 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-5reqh"
+												style="display: none;">
+												
+													POST http://localhost:8080/api/auth/register HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 50b71aab-9fa7-4698-9907-e14ee7d55756
+													<br />
+												
+													Content-Length: 330
+													<br />
+												
+													Referer: http://localhost:8080/api/auth/register
+													<br />
+												
+													host: localhost:8080
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della richiesta
+											- size: 330 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-5reqb"
+												style="display: none;">
+												
+													{
+													<br />
+												
+													    &quot;password&quot;: &quot;Stefano_Strong_88&quot;,
+													<br />
+												
+													    &quot;email&quot;: &quot;stefano.bruni@libero.it&quot;,
+													<br />
+												
+													    &quot;initialDeposit&quot;: 890.00,
+													<br />
+												
+													    &quot;firstName&quot;: &quot;Stefano&quot;,
+													<br />
+												
+													    &quot;lastName&quot;: &quot;Bruni&quot;,
+													<br />
+												
+													    &quot;nationality&quot;: &quot;Italiana&quot;,
+													<br />
+												
+													    &quot;birthday&quot;: &quot;1988-09-05&quot;,
+													<br />
+												
+													    &quot;birthPlace&quot;: &quot;Torino&quot;,
+													<br />
+												
+													    &quot;idCardNumber&quot;: &quot;ZZ11223EE&quot;,
+													<br />
+												
+													    &quot;taxId&quot;: &quot;BRNSFN88P05L219C&quot;
+													<br />
+												
+													  }
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della risposta
+											- size: 202 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-5resph"
+												style="display: none;">
+												
+													HTTP/1.1 200
+													<br />
+												
+													Vary: Origin
+													<br />
+												
+													Vary: Access-Control-Request-Method
+													<br />
+												
+													Vary: Access-Control-Request-Headers
+													<br />
+												
+													Content-Type: text/plain;charset=UTF-8
+													<br />
+												
+													Content-Length: 31
+													<br />
+												
+													Date: Thu, 19 Mar 2026 14:53:12 GMT
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della risposta
+											- size: 31 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-5respb"
+												style="display: none;">
+												
+													Utente registrato con successo!
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									
+									
+										<td width="80%">1</td>
+									
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to &#39;nosniff&#39; for all web pages.</div>
+											<br />
+										
+											<div>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)">https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</a>
+											<br />
+										
+											<a href="https://owasp.org/www-community/Security_Headers">https://owasp.org/www-community/Security_Headers</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Etichette</td>
+									<td width="80%">
+
+											
+												<a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a>
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_QA_STD
+											=
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_PENTEST
+											=
+											
+											
+											<br />
+										
+
+											
+												<a href="https://www.zaproxy.org/docs/desktop/addons/common-library/alerttags/#systemic">SYSTEMIC</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a>
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">15</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10021/">10021</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-0"><a
+										id="plugin-10111"></a>
+										<div>Informativo</div></th>
+									<th class="risk-0">Authentication Request Identified</th>
+								</tr>
+								<tr>
+									<td width="20%">Descrizione</td>
+									<td width="80%">
+											<div>The given request has been identified as an authentication request. The &#39;Other Info&#39; field contains a set of key=value lines which identify any relevant fields. If the request is in a context which has an Authentication Method set to &quot;Auto-Detect&quot; then this rule will change the authentication to match the request identified.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:8080/api/auth/login">http://localhost:8080/api/auth/login</a></td>
+									</tr>
+									
+										<tr>
+											<td width="20%"
+												class="indent2">Node Name</td>
+											<td width="80%">http://localhost:8080/api/auth/login ()({password,email})</td>
+										</tr>
+									
+									<tr>
+										<td width="20%"
+											class="indent2">Metodo</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">email</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attacco</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%">password</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-6">
+												<a
+													onclick="showHide(&#39;alert-6&#39;);"
+													href="#6">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della richiesta
+											- size: 325 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-6reqh"
+												style="display: none;">
+												
+													POST http://localhost:8080/api/auth/login HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													User-Agent: PostmanRuntime/7.52.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: b3e1f2ab-2b25-4e4e-aa4b-5811b3dc30fb
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 82
+													<br />
+												
+													Referer: http://localhost:8080/api/auth/login
+													<br />
+												
+													host: localhost:8080
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della richiesta
+											- size: 82 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-6reqb"
+												style="display: none;">
+												
+													{
+													<br />
+												
+													    &quot;password&quot;: &quot;Stefano_Strong_88&quot;,
+													<br />
+												
+													    &quot;email&quot;: &quot;stefano.bruni@libero.it&quot;
+													<br />
+												
+													}
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della risposta
+											- size: 413 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-6resph"
+												style="display: none;">
+												
+													HTTP/1.1 200
+													<br />
+												
+													Vary: Origin
+													<br />
+												
+													Vary: Access-Control-Request-Method
+													<br />
+												
+													Vary: Access-Control-Request-Headers
+													<br />
+												
+													X-Content-Type-Options: nosniff
+													<br />
+												
+													X-XSS-Protection: 0
+													<br />
+												
+													Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+													<br />
+												
+													Pragma: no-cache
+													<br />
+												
+													Expires: 0
+													<br />
+												
+													X-Frame-Options: DENY
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Date: Thu, 19 Mar 2026 14:55:07 GMT
+													<br />
+												
+													Keep-Alive: timeout=60
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													content-length: 262
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della risposta
+											- size: 262 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-6respb"
+												style="display: none;">
+												
+													{&quot;id&quot;:5,&quot;username&quot;:&quot;stefano.bruni@libero.it&quot;,&quot;role&quot;:&quot;USER&quot;,&quot;token&quot;:&quot;eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdGVmYW5vLmJydW5pQGxpYmVyby5pdCIsImlhdCI6MTc3MzkzMjEwNywiZXhwIjoxNzc0MDE4NTA3fQ.YxUg6Dp4kmgIWUOz1LPzSaP8pgZw6OG2gKYvx3PilXchFmClEptOIpea1iPgO-kj&quot;,&quot;type&quot;:&quot;Bearer&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									
+									
+										<td width="80%">1</td>
+									
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>This is an informational alert rather than a vulnerability and so there is nothing to fix.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://www.zaproxy.org/docs/desktop/addons/authentication-helper/auth-req-id/">https://www.zaproxy.org/docs/desktop/addons/authentication-helper/auth-req-id/</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Etichette</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10111/">10111</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-0"><a
+										id="plugin-10027"></a>
+										<div>Informativo</div></th>
+									<th class="risk-0">Information Disclosure - Suspicious Comments</th>
+								</tr>
+								<tr>
+									<td width="20%">Descrizione</td>
+									<td width="80%">
+											<div>The response appears to contain suspicious comments which may help an attacker.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:8080/api/savings-goals">http://localhost:8080/api/savings-goals</a></td>
+									</tr>
+									
+										<tr>
+											<td width="20%"
+												class="indent2">Node Name</td>
+											<td width="80%">http://localhost:8080/api/savings-goals ()({
+    &quot;name&quot;: &quot;Savings Goal for Vacation&quot;,
+    &quot;targetAmount&quot;: 5000,
+    &quot;amount&quot;: 100
+} AND 1=1 --)</td>
+										</tr>
+									
+									<tr>
+										<td width="20%"
+											class="indent2">Metodo</td>
+										<td width="80%">GET</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attacco</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%">ame&quot;:&quot;&lt;xsl:value-of select=\&quot;system-property(&#39;</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-10">
+												<a
+													onclick="showHide(&#39;alert-10&#39;);"
+													href="#10">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della richiesta
+											- size: 531 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-10reqh"
+												style="display: none;">
+												
+													GET http://localhost:8080/api/savings-goals HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdGVmYW5vLmJydW5pQGxpYmVyby5pdCIsImlhdCI6MTc3MzkzMjEwNywiZXhwIjoxNzc0MDE4NTA3fQ.YxUg6Dp4kmgIWUOz1LPzSaP8pgZw6OG2gKYvx3PilXchFmClEptOIpea1iPgO-kj
+													<br />
+												
+													User-Agent: PostmanRuntime/7.52.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 3dc8a0a9-5b05-4127-8cea-36837b755488
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 103
+													<br />
+												
+													Referer: http://localhost:8080/api/savings-goals
+													<br />
+												
+													host: localhost:8080
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della richiesta
+											- size: 103 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-10reqb"
+												style="display: none;">
+												
+													{
+													<br />
+												
+													    &quot;name&quot;: &quot;Savings Goal for Vacation&quot;,
+													<br />
+												
+													    &quot;targetAmount&quot;: 5000,
+													<br />
+												
+													    &quot;amount&quot;: 100
+													<br />
+												
+													} AND 1=1 --
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della risposta
+											- size: 415 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-10resph"
+												style="display: none;">
+												
+													HTTP/1.1 200
+													<br />
+												
+													Vary: Origin
+													<br />
+												
+													Vary: Access-Control-Request-Method
+													<br />
+												
+													Vary: Access-Control-Request-Headers
+													<br />
+												
+													X-Content-Type-Options: nosniff
+													<br />
+												
+													X-XSS-Protection: 0
+													<br />
+												
+													Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+													<br />
+												
+													Pragma: no-cache
+													<br />
+												
+													Expires: 0
+													<br />
+												
+													X-Frame-Options: DENY
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Date: Fri, 20 Mar 2026 12:08:52 GMT
+													<br />
+												
+													Keep-Alive: timeout=60
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													content-length: 19183
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della risposta
+											- size: 19.183 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-10respb"
+												style="display: none;">
+												
+													[{&quot;name&quot;:&quot;http://www.google.com/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:2},{&quot;name&quot;:&quot;http://www.google.com:80/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:3},{&quot;name&quot;:&quot;http://www.google.com&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:4},{&quot;name&quot;:&quot;http://www.google.com/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:5},{&quot;name&quot;:&quot;http://www.google.com:80/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:6},{&quot;name&quot;:&quot;www.google.com/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:7},{&quot;name&quot;:&quot;www.google.com:80/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:8},{&quot;name&quot;:&quot;www.google.com&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:9},{&quot;name&quot;:&quot;www.google.com/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:10},{&quot;name&quot;:&quot;www.google.com:80/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:11},{&quot;name&quot;:&quot;5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:12},{&quot;name&quot;:&quot;https://5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:13},{&quot;name&quot;:&quot;https://5669053901664242087%2eowasp%2eorg&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:14},{&quot;name&quot;:&quot;5;URL=&#39;https://5669053901664242087.owasp.org&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:15},{&quot;name&quot;:&quot;URL=&#39;http://5669053901664242087.owasp.org&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:16},{&quot;name&quot;:&quot;https://5669053901664242087.owasp.org/?Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:17},{&quot;name&quot;:&quot;5;URL=&#39;https://5669053901664242087.owasp.org/?Savings Goal for Vacation&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:18},{&quot;name&quot;:&quot;https://\\5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:19},{&quot;name&quot;:&quot;http://\\5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:20},{&quot;name&quot;:&quot;&lt;!--#EXEC cmd=\&quot;ls /\&quot;--&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:21},{&quot;name&quot;:&quot;\&quot;&gt;&lt;!--#EXEC cmd=\&quot;ls /\&quot;--&gt;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:22},{&quot;name&quot;:&quot;&lt;!--#EXEC cmd=\&quot;dir \\\&quot;--&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:23},{&quot;name&quot;:&quot;\&quot;&gt;&lt;!--#EXEC cmd=\&quot;dir \\\&quot;--&gt;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:24},{&quot;name&quot;:&quot;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:25},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:26},{&quot;name&quot;:&quot;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:27},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:28},{&quot;name&quot;:&quot;;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:29},{&quot;name&quot;:&quot;Savings Goal for Vacation;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:30},{&quot;name&quot;:&quot;&#39;(&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:31},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;(&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:32},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:33},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:34},{&quot;name&quot;:&quot;Savings Goal for Vacation AND 1=1 -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:35},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39; AND &#39;1&#39;=&#39;1&#39; -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:36},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot; AND \&quot;1\&quot;=\&quot;1\&quot; -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:37},{&quot;name&quot;:&quot;Savings Goal for Vacation AND 1=1&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:38},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39; AND &#39;1&#39;=&#39;1&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:39},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot; AND \&quot;1\&quot;=\&quot;1&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:40},{&quot;name&quot;:&quot;Savings Goal for Vacation UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:41},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39; UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:42},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot; UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:43},{&quot;name&quot;:&quot;Savings Goal for Vacation) UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:44},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;) UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:45},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:46},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:47},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:48},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:49},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:50},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:51},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:52},{&quot;name&quot;:&quot;\&quot;;print(chr(122).chr(97).chr(112).chr(95).chr(116).chr(111).chr(107).chr(101).chr(110));$var=\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:53},{&quot;name&quot;:&quot;&#39;;print(chr(122).chr(97).chr(112).chr(95).chr(116).chr(111).chr(107).chr(101).chr(110));$var=&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:54},{&quot;name&quot;:&quot;${@print(chr(122).chr(97).chr(112).chr(95).chr(116).chr(111).chr(107).chr(101).chr(110))}&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:55},{&quot;name&quot;:&quot;${@print(chr(122).chr(97).chr(112).chr(95).chr(116).chr(111).chr(107).chr(101).chr(110))}\\&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:56},{&quot;name&quot;:&quot;;print(chr(122).chr(97).chr(112).chr(95).chr(116).chr(111).chr(107).chr(101).chr(110));&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:57},{&quot;name&quot;:&quot;\&quot;+response.write(68.315*781.566)+\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:58},{&quot;name&quot;:&quot;+response.write({0}*{1})+&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:59},{&quot;name&quot;:&quot;response.write(68.315*781.566)&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:60},{&quot;name&quot;:&quot;cat /etc/passwd&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:61},{&quot;name&quot;:&quot;Savings Goal for Vacation&amp;cat /etc/passwd&amp;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:62},{&quot;name&quot;:&quot;Savings Goal for Vacation;cat /etc/passwd;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:63},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&amp;cat /etc/passwd&amp;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:64},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;;cat /etc/passwd;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:65},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&amp;cat /etc/passwd&amp;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:66},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;;cat /etc/passwd;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:67},{&quot;name&quot;:&quot;type %SYSTEMROOT%\\win.ini&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:68},{&quot;name&quot;:&quot;Savings Goal for Vacation&amp;type %SYSTEMROOT%\\win.ini&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:69},{&quot;name&quot;:&quot;Savings Goal for Vacation|type %SYSTEMROOT%\\win.ini&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:70},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&amp;type %SYSTEMROOT%\\win.ini&amp;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:71},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;|type %SYSTEMROOT%\\win.ini&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:72},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&amp;type %SYSTEMROOT%\\win.ini&amp;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:73},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;|type %SYSTEMROOT%\\win.ini&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:74},{&quot;name&quot;:&quot;get-help&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:75},{&quot;name&quot;:&quot;Savings Goal for Vacation;get-help&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:76},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;;get-help&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:77},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;;get-help&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:78},{&quot;name&quot;:&quot;Savings Goal for Vacation;get-help #&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:79},{&quot;name&quot;:&quot;\&quot;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:80},{&quot;name&quot;:&quot;&lt;!--&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:81},{&quot;name&quot;:&quot;]]&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:82},{&quot;name&quot;:&quot;zj 6683*7142 zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:83},{&quot;name&quot;:&quot;zj{3540*4930}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:84},{&quot;name&quot;:&quot;zj${3343*6279}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:85},{&quot;name&quot;:&quot;zj#{2077*1172}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:86},{&quot;name&quot;:&quot;zj{#4281*2812}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:87},{&quot;name&quot;:&quot;zj{@2589*1390}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:88},{&quot;name&quot;:&quot;zj{{5180*5441}}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:89},{&quot;name&quot;:&quot;zj{{=6608*5216}}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:90},{&quot;name&quot;:&quot;zj&lt;%=4910*6254%&gt;zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:91},{&quot;name&quot;:&quot;zj#set($x=9135*1769)${x}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:92},{&quot;name&quot;:&quot;zj&lt;p th:text=\&quot;${5117*3056}\&quot;&gt;&lt;/p&gt;zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:93},{&quot;name&quot;:&quot;zj{@math key=\&quot;8496\&quot; method=\&quot;multiply\&quot; operand=\&quot;8749\&quot;/}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:94},{&quot;name&quot;:&quot;zj{{67330|add:15800}}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:95},{&quot;name&quot;:&quot;zj{{print \&quot;3184\&quot; \&quot;7229\&quot;}}zj&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:96},{&quot;name&quot;:&quot;Savings Goal for Vacation&amp;sleep 15.0&amp;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:97},{&quot;name&quot;:&quot;Savings Goal for Vacation;sleep 15.0;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:98},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&amp;sleep 15.0&amp;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:99},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;;sleep 15.0;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:100},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&amp;sleep 15.0&amp;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:101},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;;sleep 15.0;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:102},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;|timeout /T 15.0&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:103},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&amp;timeout /T 15.0&amp;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:104},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&amp;timeout /T 15.0&amp;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:105},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;|timeout /T 15.0&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:106},{&quot;name&quot;:&quot;Savings Goal for Vacation;start-sleep -s 15.0&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:107},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;;start-sleep -s 15.0&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:108},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;;start-sleep -s 15.0&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:109},{&quot;name&quot;:&quot;Savings Goal for Vacation;start-sleep -s 15.0 #&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:110},{&quot;name&quot;:&quot;ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:111},{&quot;name&quot;:&quot;ZAP%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s\n&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:112},{&quot;name&quot;:&quot;ZAP %1!s%2!s%3!s%4!s%5!s%6!s%7!s%8!s%9!s%10!s%11!s%12!s%13!s%14!s%15!s%16!s%17!s%18!s%19!s%20!s%21!n%22!n%23!n%24!n%25!n%26!n%27!n%28!n%29!n%30!n%31!n%32!n%33!n%34!n%35!n%36!n%37!n%38!n%39!n%40!n\n&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:113},{&quot;name&quot;:&quot;Set-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:114},{&quot;name&quot;:&quot;any\r\nSet-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:115},{&quot;name&quot;:&quot;any?\r\nSet-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:116},{&quot;name&quot;:&quot;any\nSet-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:117},{&quot;name&quot;:&quot;any?\nSet-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:118},{&quot;name&quot;:&quot;any\r\nSet-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7\r\n&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:119},{&quot;name&quot;:&quot;any?\r\nSet-cookie: Tamper=5770cda0-9c69-4c62-8e12-cd49ac163ba7\r\n&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:120},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:121},{&quot;name&quot;:&quot;null&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:122},{&quot;name&quot;:&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:123},{&quot;name&quot;:&quot;@&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:124},{&quot;name&quot;:&quot;+&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:125},{&quot;name&quot;:&quot;\u0000&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:126},{&quot;name&quot;:&quot;|&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:127},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:128},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:129},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:130},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:131},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:132},{&quot;name&quot;:&quot;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:133},{&quot;name&quot;:&quot;&lt;xsl:value-of select=\&quot;system-property(&#39;xsl:vendor&#39;)\&quot;/&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:134},{&quot;name&quot;:&quot;system-property(&#39;xsl:vendor&#39;)/&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:135},{&quot;name&quot;:&quot;\&quot;/&gt;&lt;xsl:value-of select=\&quot;system-property(&#39;xsl:vendor&#39;)\&quot;/&gt;&lt;!--&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:136},{&quot;name&quot;:&quot;&lt;xsl:value-of select=\&quot;system-property(&#39;xsl:vendor&#39;)\&quot;/&gt;&lt;!--&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:137},{&quot;name&quot;:&quot;&lt;xsl:value-of select=\&quot;document(&#39;http://localhost:22&#39;)\&quot;/&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:138},{&quot;name&quot;:&quot;&lt;xsl:variable name=\&quot;rtobject\&quot; select=\&quot;runtime:getRuntime()\&quot;/&gt;\n&lt;xsl:variable name=\&quot;process\&quot; select=\&quot;runtime:exec($rtobject,&#39;erroneous_command&#39;)\&quot;/&gt;\n&lt;xsl:variable name=\&quot;waiting\&quot; select=\&quot;process:waitFor($process)\&quot;/&gt;\n&lt;xsl:value-of select=\&quot;$process\&quot;/&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:139},{&quot;name&quot;:&quot;&lt;xsl:value-of select=\&quot;php:function(&#39;exec&#39;,&#39;erroneous_command 2&gt;&amp;amp;1&#39;)\&quot;/&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:140},{&quot;name&quot;:&quot;http://www.google.com/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:141},{&quot;name&quot;:&quot;http://www.google.com:80/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:142},{&quot;name&quot;:&quot;http://www.google.com&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:143},{&quot;name&quot;:&quot;http://www.google.com/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:144},{&quot;name&quot;:&quot;http://www.google.com:80/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:145},{&quot;name&quot;:&quot;www.google.com/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:146},{&quot;name&quot;:&quot;www.google.com:80/&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:147},{&quot;name&quot;:&quot;www.google.com&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:148},{&quot;name&quot;:&quot;www.google.com/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:149},{&quot;name&quot;:&quot;www.google.com:80/search?q=ZAP&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:150},{&quot;name&quot;:&quot;5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:151},{&quot;name&quot;:&quot;https://5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:152},{&quot;name&quot;:&quot;https://5669053901664242087%2eowasp%2eorg&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:153},{&quot;name&quot;:&quot;5;URL=&#39;https://5669053901664242087.owasp.org&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:154},{&quot;name&quot;:&quot;URL=&#39;http://5669053901664242087.owasp.org&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:155},{&quot;name&quot;:&quot;https://5669053901664242087.owasp.org/?Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:156},{&quot;name&quot;:&quot;5;URL=&#39;https://5669053901664242087.owasp.org/?Savings Goal for Vacation&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:157},{&quot;name&quot;:&quot;https://\\5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:158},{&quot;name&quot;:&quot;http://\\5669053901664242087.owasp.org&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:159},{&quot;name&quot;:&quot;&lt;!--#EXEC cmd=\&quot;ls /\&quot;--&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:160},{&quot;name&quot;:&quot;\&quot;&gt;&lt;!--#EXEC cmd=\&quot;ls /\&quot;--&gt;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:161},{&quot;name&quot;:&quot;&lt;!--#EXEC cmd=\&quot;dir \\\&quot;--&gt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:162},{&quot;name&quot;:&quot;\&quot;&gt;&lt;!--#EXEC cmd=\&quot;dir \\\&quot;--&gt;&lt;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:163},{&quot;name&quot;:&quot;&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:164},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:165},{&quot;name&quot;:&quot;\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:166},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:167},{&quot;name&quot;:&quot;;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:168},{&quot;name&quot;:&quot;Savings Goal for Vacation;&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:169},{&quot;name&quot;:&quot;&#39;(&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:170},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;(&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:171},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:172},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:173},{&quot;name&quot;:&quot;Savings Goal for Vacation AND 1=1 -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:174},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39; AND &#39;1&#39;=&#39;1&#39; -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:175},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot; AND \&quot;1\&quot;=\&quot;1\&quot; -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:176},{&quot;name&quot;:&quot;Savings Goal for Vacation AND 1=1&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:177},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39; AND &#39;1&#39;=&#39;1&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:178},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot; AND \&quot;1\&quot;=\&quot;1&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:179},{&quot;name&quot;:&quot;Savings Goal for Vacation UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:180},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39; UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:181},{&quot;name&quot;:&quot;Savings Goal for Vacation\&quot; UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:182},{&quot;name&quot;:&quot;Savings Goal for Vacation) UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:183},{&quot;name&quot;:&quot;Savings Goal for Vacation&#39;) UNION ALL select NULL -- &quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:184},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:185},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:186},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:187},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:188},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:189},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:190},{&quot;name&quot;:&quot;Savings Goal for Vacation&quot;,&quot;targetAmount&quot;:5000.00,&quot;currentAmount&quot;:0.00,&quot;id&quot;:191}]
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									
+									
+										<td width="80%">1</td>
+									
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">Etichette</td>
+									<td width="80%">
+
+											
+												<a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP_2021_A01</a>
+											
+											
+											<br />
+										
+
+											
+											
+												POLICY_PENTEST
+											=
+											
+											
+											<br />
+										
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/615.html">CWE-615</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/05-Review_Webpage_Content_for_Information_Leakage">WSTG-v42-INFO-05</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html">OWASP_2017_A03</a>
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/615.html">615</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">13</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10027/">10027</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-0"><a
+										id="plugin-10112"></a>
+										<div>Informativo</div></th>
+									<th class="risk-0">Session Management Response Identified</th>
+								</tr>
+								<tr>
+									<td width="20%">Descrizione</td>
+									<td width="80%">
+											<div>The given response has been identified as containing a session management token. The &#39;Other Info&#39; field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to &quot;Auto-Detect&quot; then this rule will change the session management to use the tokens identified.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:8080/api/auth/login">http://localhost:8080/api/auth/login</a></td>
+									</tr>
+									
+										<tr>
+											<td width="20%"
+												class="indent2">Node Name</td>
+											<td width="80%">http://localhost:8080/api/auth/login ()({password,email})</td>
+										</tr>
+									
+									<tr>
+										<td width="20%"
+											class="indent2">Metodo</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">token</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attacco</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%">token</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-7">
+												<a
+													onclick="showHide(&#39;alert-7&#39;);"
+													href="#7">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della richiesta
+											- size: 325 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-7reqh"
+												style="display: none;">
+												
+													POST http://localhost:8080/api/auth/login HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													User-Agent: PostmanRuntime/7.52.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: b3e1f2ab-2b25-4e4e-aa4b-5811b3dc30fb
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 82
+													<br />
+												
+													Referer: http://localhost:8080/api/auth/login
+													<br />
+												
+													host: localhost:8080
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della richiesta
+											- size: 82 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-7reqb"
+												style="display: none;">
+												
+													{
+													<br />
+												
+													    &quot;password&quot;: &quot;Stefano_Strong_88&quot;,
+													<br />
+												
+													    &quot;email&quot;: &quot;stefano.bruni@libero.it&quot;
+													<br />
+												
+													}
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Intestazione della risposta
+											- size: 413 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-7resph"
+												style="display: none;">
+												
+													HTTP/1.1 200
+													<br />
+												
+													Vary: Origin
+													<br />
+												
+													Vary: Access-Control-Request-Method
+													<br />
+												
+													Vary: Access-Control-Request-Headers
+													<br />
+												
+													X-Content-Type-Options: nosniff
+													<br />
+												
+													X-XSS-Protection: 0
+													<br />
+												
+													Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+													<br />
+												
+													Pragma: no-cache
+													<br />
+												
+													Expires: 0
+													<br />
+												
+													X-Frame-Options: DENY
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													Date: Thu, 19 Mar 2026 14:55:07 GMT
+													<br />
+												
+													Keep-Alive: timeout=60
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													content-length: 262
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Corpo della risposta
+											- size: 262 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-7respb"
+												style="display: none;">
+												
+													{&quot;id&quot;:5,&quot;username&quot;:&quot;stefano.bruni@libero.it&quot;,&quot;role&quot;:&quot;USER&quot;,&quot;token&quot;:&quot;eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdGVmYW5vLmJydW5pQGxpYmVyby5pdCIsImlhdCI6MTc3MzkzMjEwNywiZXhwIjoxNzc0MDE4NTA3fQ.YxUg6Dp4kmgIWUOz1LPzSaP8pgZw6OG2gKYvx3PilXchFmClEptOIpea1iPgO-kj&quot;,&quot;type&quot;:&quot;Bearer&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									
+									
+										<td width="80%">1</td>
+									
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>This is an informational alert rather than a vulnerability and so there is nothing to fix.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/">https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Etichette</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10112/">10112</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+				
+
+				<footer>
+					Report by 
+					<a href="https://www.zaproxy.org/" target="_blank">ZAP</a>
+					
+				</footer>
+
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+[
+  {
+    "password": "SafePassword123!",
+    "email": "marco.rossi@provider.it",
+    "initialDeposit": 1500.50,
+    "firstName": "Marco",
+    "lastName": "Rossi",
+    "nationality": "Italiana",
+    "birthday": "1985-05-20",
+    "birthPlace": "Milano",
+    "idCardNumber": "CA12345AA",
+    "taxId": "RSSMRC85E20F205Z"
+  },
+	IBAN: IT859BA68767B643FB827AA3
+  {
+    "password": "SecureAccess_92",
+    "email": "giulia.bianchi@testmail.com",
+    "initialDeposit": 2700.00,
+    "firstName": "Giulia",
+    "lastName": "Bianchi",
+    "nationality": "Italiana",
+    "birthday": "1992-11-12",
+    "birthPlace": "Roma",
+    "idCardNumber": "TR98765BB",
+    "taxId": "BNCHGL92S52H501Y"
+  },
+	IBAN: IT81102EBC431C45ED8316AA
+  {
+    "password": "Crypto_Key_2026",
+    "email": "luca.verdi@webmail.it",
+    "initialDeposit": 500.25,
+    "firstName": "Luca",
+    "lastName": "Verdi",
+    "nationality": "Italiana",
+    "birthday": "1978-03-30",
+    "birthPlace": "Napoli",
+    "idCardNumber": "AY55443CC",
+    "taxId": "VRDLVC78C30F839O"
+  },
+	IBAN: ITA0330BBB87D44471A9E907
+  {
+    "password": "ElenaPass#2024",
+    "email": "elena.neri@azienda.org",
+    "initialDeposit": 12450.00,
+    "firstName": "Elena",
+    "lastName": "Neri",
+    "nationality": "Italiana",
+    "birthday": "1995-07-15",
+    "birthPlace": "Firenze",
+    "idCardNumber": "FG00998DD",
+    "taxId": "NRELNE95L55D612X"
+  },
+	IBAN: ITE86BD223E01B4C84B5109B
+  {
+    "password": "Stefano_Strong_88",
+    "email": "stefano.bruni@libero.it",
+    "initialDeposit": 890.00,
+    "firstName": "Stefano",
+    "lastName": "Bruni",
+    "nationality": "Italiana",
+    "birthday": "1988-09-05",
+    "birthPlace": "Torino",
+    "idCardNumber": "ZZ11223EE",
+    "taxId": "BRNSFN88P05L219C"
+  },
+	IBAN: IT17B59CFAD0434082A7E14E
+  {
+    "password": "ChiaraLupi!90",
+    "email": "chiara.lupi@gmail.com",
+    "initialDeposit": 3100.75,
+    "firstName": "Chiara",
+    "lastName": "Lupi",
+    "nationality": "Italiana",
+    "birthday": "1990-04-18",
+    "birthPlace": "Bari",
+    "idCardNumber": "KK44332FF",
+    "taxId": "LPUCHR90D58A662V"
+  },
+	IBAN: ITFBF51FACE5F74E5C97962D
+  {
+    "password": "Ale_Ferri_Secret",
+    "email": "alessandro.ferri@outlook.it",
+    "initialDeposit": 150.00,
+    "firstName": "Alessandro",
+    "lastName": "Ferri",
+    "nationality": "Italiana",
+    "birthday": "1982-12-12",
+    "birthPlace": "Bologna",
+    "idCardNumber": "LL88776GG",
+    "taxId": "FRRLSN82T12A944K"
+  },
+	IBAN: IT0961614B13CD4023BA0B3A
+  {
+    "password": "Fran_Cost_2026!",
+    "email": "francesca.costa@tiscali.it",
+    "initialDeposit": 6200.40,
+    "firstName": "Francesca",
+    "lastName": "Costa",
+    "nationality": "Italiana",
+    "birthday": "1998-02-25",
+    "birthPlace": "Palermo",
+    "idCardNumber": "MM55667HH",
+    "taxId": "CSTFNC98B65G273M"
+  },
+	IBAN:IT5D39A5F6216F46FE8B5977
+  {
+    "password": "Roby_Gatti_75#",
+    "email": "roberto.gatti@fastweb.it",
+    "initialDeposit": 45000.00,
+    "firstName": "Roberto",
+    "lastName": "Gatti",
+    "nationality": "Italiana",
+    "birthday": "1975-06-08",
+    "birthPlace": "Genova",
+    "idCardNumber": "NN11224II",
+    "taxId": "GTTRBT75H08D969W"
+  },
+	IBAN: IT609AF8105A09431EA9F76E
+  {
+    "password": "Silvia_Rizzo_2026",
+    "email": "silvia.rizzo@provider.com",
+    "initialDeposit": 1850.20,
+    "firstName": "Silvia",
+    "lastName": "Rizzo",
+    "nationality": "Italiana",
+    "birthday": "1987-10-10",
+    "birthPlace": "Verona",
+    "idCardNumber": "OO99887JJ",
+    "taxId": "RZZSLV87R50L781Y"
+  }
+	IBAN: ITFBF9B2B89F5948D3AE685D
+]

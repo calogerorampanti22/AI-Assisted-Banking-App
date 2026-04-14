@@ -1,0 +1,45 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Ignored default folder with query files
+/queries/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+target/
+*.class
+.idea/
+.vscode/
+*.iml
+*.log
+
+# Wrapper
+mvnw
+mvnw.cmd
+.mvn/
+
+# Environment Variables
+.env
+
+# SonarQube
+.scannerwork/
+
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch

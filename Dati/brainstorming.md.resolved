@@ -1,0 +1,22 @@
+# Brainstorming: Nuove Funzionalità per la Banking App
+
+Ecco alcune idee per espandere le funzionalità della tua applicazione bancaria, suddivise per aree di sviluppo.
+
+## 💳 Gestione Carte Migliorata
+*   **Impostazione Limiti di Spesa:** Permettere all'utente di definire limiti giornalieri o mensili (sia per prelievi che per pagamenti online).
+*   **Dettaglio Transazioni per Carta:** Filtrare le transazioni mostrando solo quelle effettuate con una specifica carta.
+*   **Plafond / Saldo Carta:** Per le carte di credito e prepagate, mostrare graficamente quanto plafond o saldo residuo rimane.
+
+## 💸 Bonifici e Pagamenti
+*   **Bonifici Periodici (Ricorrenti):** Programmare bonifici automatici (es. affitto, bollette) ogni mese.
+*   **Ricarica Telefonica:** Un modulo veloce per scalare soldi dal conto e ricaricare numeri di telefono salvati.
+
+## 📊 Analytics e Risparmi
+*   **Report Mensile in PDF:** Generare e scaricare l'estratto conto del mese in formato PDF.
+
+## 🛡️ Sicurezza e Profilo
+*   **Autenticazione a Due Fattori (2FA):** Aggiungere un livello extra di sicurezza al login e per validare i bonifici in uscita (es. tramite un codice generato).
+*   **Impostazioni Notifiche:** Simulare invio di email o notifiche push quando avvengono addebiti superiori a una certa soglia.
+
+---
+_Nota Tecnica:_ Molte di queste funzionalità richiederanno modifiche sia dal lato **Spring Boot** (es. tabelle del DB, nuovi endpoint, job schedulati) sia sul **React Frontend** (es. nuovi componenti UI, grafici, modali aggiuntivi).
