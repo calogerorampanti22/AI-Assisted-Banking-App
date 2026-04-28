@@ -23,8 +23,11 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> getMyProfile() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<Object> getMyProfile() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !(auth.getPrincipal() instanceof UserDetails userDetails)) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Utente non autenticato");
+        }
         User user = userService.findByEmail(userDetails.getUsername());
 
         // Return a map instead of the User object to avoid exposing password hash and
@@ -44,10 +47,12 @@ public class UserController {
     }
 
     @PutMapping("/me/password")
-    public ResponseEntity<?> changePassword(@RequestBody PasswordUpdateDto passwordUpdateDto) {
+    public ResponseEntity<Object> changePassword(@RequestBody PasswordUpdateDto passwordUpdateDto) {
         try {
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-                    .getPrincipal();
+            var auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth == null || !(auth.getPrincipal() instanceof UserDetails userDetails)) {
+                throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Utente non autenticato");
+            }
             User user = userService.findByEmail(userDetails.getUsername());
 
             userService.updatePassword(user.getId(), passwordUpdateDto.getOldPassword(),
@@ -55,7 +60,7 @@ public class UserController {
 
             return ResponseEntity.ok(Map.of("message", "Password aggiornata con successo"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            return ResponseEntity.badRequest().body(Map.of("errorMessage", e.getMessage()));
         }
     }
 }

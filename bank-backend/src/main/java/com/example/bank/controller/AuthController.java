@@ -72,17 +72,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody RegisterRequest signUpRequest) {
         try {
-            userService.registerUser(
-                    signUpRequest.getPassword(),
-                    signUpRequest.getInitialDeposit(),
-                    signUpRequest.getFirstName(),
-                    signUpRequest.getLastName(),
-                    signUpRequest.getNationality(),
-                    signUpRequest.getBirthday(),
-                    signUpRequest.getBirthPlace(),
-                    signUpRequest.getIdCardNumber(),
-                    signUpRequest.getTaxId(),
-                    signUpRequest.getEmail());
+            userService.registerUser(signUpRequest);
             return ResponseEntity.ok("Utente registrato con successo!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

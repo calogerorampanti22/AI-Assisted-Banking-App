@@ -25,14 +25,14 @@ public class BeneficiaryService {
 
     public Beneficiary addBeneficiary(Long accountId, String firstName, String lastName, String iban) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException("Account non trovato"));
         Beneficiary beneficiary = new Beneficiary(firstName, lastName, iban, account);
         return beneficiaryRepository.save(beneficiary);
     }
 
     public void deleteBeneficiary(Long id, Long accountId) {
         Beneficiary beneficiary = beneficiaryRepository.findByIdAndAccountId(id, accountId)
-                .orElseThrow(() -> new RuntimeException("Beneficiario non trovato o non autorizzato"));
+                .orElseThrow(() -> new IllegalArgumentException("Beneficiario non trovato o non autorizzato"));
         beneficiaryRepository.delete(beneficiary);
     }
 }

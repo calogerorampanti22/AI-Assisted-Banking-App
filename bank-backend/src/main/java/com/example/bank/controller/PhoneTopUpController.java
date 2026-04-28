@@ -31,7 +31,10 @@ public class PhoneTopUpController {
     }
 
     private User getCurrentUser() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !(auth.getPrincipal() instanceof UserDetails userDetails)) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Utente non autenticato");
+        }
         return userService.findByEmail(userDetails.getUsername());
     }
 
@@ -42,7 +45,7 @@ public class PhoneTopUpController {
     }
 
     @PostMapping
-    public ResponseEntity<?> topUp(@RequestBody PhoneTopUpRequest request) {
+    public ResponseEntity<Object> topUp(@RequestBody PhoneTopUpRequest request) {
         try {
             User user = getCurrentUser();
             phoneTopUpService.processTopUp(user, request);

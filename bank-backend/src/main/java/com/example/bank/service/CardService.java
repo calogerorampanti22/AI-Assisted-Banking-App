@@ -12,13 +12,14 @@ import com.example.bank.repository.AccountRepository;
 import com.example.bank.repository.CardRepository;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Random;
+import java.security.SecureRandom;
 
 @Service
 public class CardService {
 
     private final CardRepository cardRepository;
     private final AccountRepository accountRepository;
+    private final SecureRandom random = new SecureRandom();
 
     public CardService(CardRepository cardRepository, AccountRepository accountRepository) {
         this.cardRepository = cardRepository;
@@ -46,7 +47,7 @@ public class CardService {
 
         // Simulo anche data di scadenza e CVV per poter istanziare la carta
         LocalDate expirationDate = LocalDate.now().plusYears(4);
-        String cvv = String.format("%03d", new Random().nextInt(1000));
+        String cvv = String.format("%03d", random.nextInt(1000));
 
         Card card = new Card(account, type, network, pan, expirationDate, cvv);
 
@@ -70,7 +71,6 @@ public class CardService {
         }
 
         // Generiamo le restanti 15 cifre per arrivare a 16 totali
-        Random random = new Random();
         for (int i = 0; i < 15; i++) {
             pan.append(random.nextInt(10));
         }

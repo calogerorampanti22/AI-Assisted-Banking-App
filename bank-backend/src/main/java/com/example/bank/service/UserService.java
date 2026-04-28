@@ -1,17 +1,18 @@
 package com.example.bank.service;
 
+import com.example.bank.dto.RegisterRequest;
+import com.example.bank.model.Account;
 import com.example.bank.model.Role;
 import com.example.bank.model.User;
-import com.example.bank.model.Account;
-import com.example.bank.repository.UserRepository;
 import com.example.bank.repository.AccountRepository;
+import com.example.bank.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.UUID;
+
 
 @Service
 public class UserService {
@@ -30,21 +31,29 @@ public class UserService {
     }
 
     @Transactional
-    public User registerUser(String rawPassword, BigDecimal initialDeposit,
-            String firstName, String lastName, String nationality, LocalDate birthday, String birthPlace,
-            String idCardNumber, String taxId, String email) {
-        if (userRepository.existsByEmail(email)) {
-            throw new RuntimeException("Email già registrata");
+    public User registerUser(RegisterRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new IllegalArgumentException("Email già registrata");
         }
 
-        User user = new User(passwordEncoder.encode(rawPassword), Role.USER,
-                firstName, lastName, nationality, birthday, birthPlace, idCardNumber, taxId, email);
+        User user = new User.Builder()
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.USER)
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .nationality(request.getNationality())
+                .birthday(request.getBirthday())
+                .birthPlace(request.getBirthPlace())
+                .idCardNumber(request.getIdCardNumber())
+                .taxId(request.getTaxId())
+                .email(request.getEmail())
+                .build();
         User savedUser = userRepository.save(user);
 
         // Generate IBAN/account number (simplified for demo)
         String accountNumber = "IT" + UUID.randomUUID().toString().replace("-", "").substring(0, 22).toUpperCase();
 
-        Account account = new Account(accountNumber, initialDeposit != null ? initialDeposit : BigDecimal.ZERO,
+        Account account = new Account(accountNumber, request.getInitialDeposit() != null ? request.getInitialDeposit() : BigDecimal.ZERO,
                 savedUser);
         account = accountRepository.save(account);
 
@@ -57,16 +66,16 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     @Transactional
     public void updatePassword(Long userId, String oldPassword, String newPassword) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException("Utente non trovato"));
 
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new RuntimeException("La vecchia password non è corretta");
+            throw new IllegalArgumentException("La vecchia password non è corretta");
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));

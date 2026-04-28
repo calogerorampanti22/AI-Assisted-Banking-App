@@ -49,23 +49,89 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Account account;
+    private transient Account account;
 
     public User() {
     }
 
-    public User(String password, Role role, String firstName, String lastName, String nationality,
-            LocalDate birthday, String birthPlace, String idCardNumber, String taxId, String email) {
-        this.password = password;
-        this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nationality = nationality;
-        this.birthday = birthday;
-        this.birthPlace = birthPlace;
-        this.idCardNumber = idCardNumber;
-        this.taxId = taxId;
-        this.email = email;
+    private User(Builder builder) {
+        this.password = builder.password;
+        this.role = builder.role;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.nationality = builder.nationality;
+        this.birthday = builder.birthday;
+        this.birthPlace = builder.birthPlace;
+        this.idCardNumber = builder.idCardNumber;
+        this.taxId = builder.taxId;
+        this.email = builder.email;
+    }
+
+    public static class Builder {
+        private String password;
+        private Role role;
+        private String firstName;
+        private String lastName;
+        private String nationality;
+        private LocalDate birthday;
+        private String birthPlace;
+        private String idCardNumber;
+        private String taxId;
+        private String email;
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder role(Role role) {
+            this.role = role;
+            return this;
+        }
+
+        public Builder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder nationality(String nationality) {
+            this.nationality = nationality;
+            return this;
+        }
+
+        public Builder birthday(LocalDate birthday) {
+            this.birthday = birthday;
+            return this;
+        }
+
+        public Builder birthPlace(String birthPlace) {
+            this.birthPlace = birthPlace;
+            return this;
+        }
+
+        public Builder idCardNumber(String idCardNumber) {
+            this.idCardNumber = idCardNumber;
+            return this;
+        }
+
+        public Builder taxId(String taxId) {
+            this.taxId = taxId;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 
     public Long getId() {

@@ -29,28 +29,28 @@ public class TransactionService {
     @Transactional
     public Transaction processTransfer(Long accountId, TransferRequest request) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException("Account non trovato"));
 
         TransactionType type = TransactionType.valueOf(request.getType().toUpperCase());
         BigDecimal amount = request.getAmount();
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new RuntimeException("L'importo deve essere positivo");
+            throw new IllegalArgumentException("L'importo deve essere positivo");
         }
 
         if (type == TransactionType.OUT) {
             if (account.getBalance().compareTo(amount) < 0) {
-                throw new RuntimeException("Saldo insufficiente");
+                throw new IllegalArgumentException("Saldo insufficiente");
             }
 
             // Find recipient by IBAN
             Account recipientAccount = accountRepository.findByAccountNumber(request.getRelatedAccountNumber())
-                    .orElseThrow(() -> new RuntimeException("Destinazione IBAN non trovata."));
+                    .orElseThrow(() -> new IllegalArgumentException("Destinazione IBAN non trovata."));
 
             // Validate recipient Name and Surname (case-insensitive)
             if (!recipientAccount.getUser().getFirstName().equalsIgnoreCase(request.getRecipientFirstName()) ||
                     !recipientAccount.getUser().getLastName().equalsIgnoreCase(request.getRecipientLastName())) {
-                throw new RuntimeException("Nome o cognome del beneficiario non corrispondenti all'IBAN.");
+                throw new IllegalArgumentException("Nome o cognome del beneficiario non corrispondenti all'IBAN.");
             }
 
             // Perform transfer
@@ -103,16 +103,16 @@ public class TransactionService {
     @Transactional
     public Transaction processBillPayment(Long accountId, BillPaymentRequest request) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException("Account non trovato"));
 
         BigDecimal amount = request.getAmount();
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new RuntimeException("L'importo deve essere positivo");
+            throw new IllegalArgumentException("L'importo deve essere positivo");
         }
 
         if (account.getBalance().compareTo(amount) < 0) {
-            throw new RuntimeException("Saldo insufficiente per completare il pagamento");
+            throw new IllegalArgumentException("Saldo insufficiente per completare il pagamento");
         }
 
         // Deducing balance from user account

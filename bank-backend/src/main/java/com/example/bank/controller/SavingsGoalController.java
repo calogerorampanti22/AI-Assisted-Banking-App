@@ -31,10 +31,13 @@ public class SavingsGoalController {
     }
 
     private Account getCurrentUserAccount() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !(auth.getPrincipal() instanceof UserDetails userDetails)) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Utente non autenticato");
+        }
         User user = userService.findByEmail(userDetails.getUsername());
         return accountRepository.findByUserId(user.getId())
-                .orElseThrow(() -> new RuntimeException("Account non trovato"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Account non trovato"));
     }
 
     @GetMapping
@@ -50,7 +53,7 @@ public class SavingsGoalController {
     }
 
     @PostMapping("/{id}/deposit")
-    public ResponseEntity<?> deposit(@PathVariable Long id, @RequestBody SavingsGoalRequest request) {
+    public ResponseEntity<Object> deposit(@PathVariable Long id, @RequestBody SavingsGoalRequest request) {
         try {
             savingsGoalService.deposit(id, request.getAmount());
             return ResponseEntity.ok().build();
@@ -60,7 +63,7 @@ public class SavingsGoalController {
     }
 
     @PostMapping("/{id}/withdraw")
-    public ResponseEntity<?> withdraw(@PathVariable Long id, @RequestBody SavingsGoalRequest request) {
+    public ResponseEntity<Object> withdraw(@PathVariable Long id, @RequestBody SavingsGoalRequest request) {
         try {
             savingsGoalService.withdraw(id, request.getAmount());
             return ResponseEntity.ok().build();
@@ -70,7 +73,7 @@ public class SavingsGoalController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteGoal(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteGoal(@PathVariable Long id) {
         try {
             savingsGoalService.deleteGoal(id);
             return ResponseEntity.ok().build();

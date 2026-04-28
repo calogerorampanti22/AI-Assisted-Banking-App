@@ -18,6 +18,8 @@ public class SavingsGoalService {
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
 
+    private static final String GOAL_NOT_FOUND_MSG = "Obiettivo non trovato";
+
     public SavingsGoalService(SavingsGoalRepository savingsGoalRepository, AccountRepository accountRepository,
             TransactionRepository transactionRepository) {
         this.savingsGoalRepository = savingsGoalRepository;
@@ -38,11 +40,11 @@ public class SavingsGoalService {
     @Transactional
     public void deposit(Long goalId, BigDecimal amount) {
         SavingsGoal goal = savingsGoalRepository.findById(goalId)
-                .orElseThrow(() -> new RuntimeException("Obiettivo non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException(GOAL_NOT_FOUND_MSG));
 
         Account account = goal.getAccount();
         if (account.getBalance().compareTo(amount) < 0) {
-            throw new RuntimeException("Saldo insufficiente sul conto principale");
+            throw new IllegalArgumentException("Saldo insufficiente sul conto principale");
         }
 
         // Update amounts
@@ -65,11 +67,15 @@ public class SavingsGoalService {
 
     @Transactional
     public void withdraw(Long goalId, BigDecimal amount) {
+        performWithdraw(goalId, amount);
+    }
+
+    private void performWithdraw(Long goalId, BigDecimal amount) {
         SavingsGoal goal = savingsGoalRepository.findById(goalId)
-                .orElseThrow(() -> new RuntimeException("Obiettivo non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException(GOAL_NOT_FOUND_MSG));
 
         if (goal.getCurrentAmount().compareTo(amount) < 0) {
-            throw new RuntimeException("Fondi insufficienti nel salvadanaio");
+            throw new IllegalArgumentException("Fondi insufficienti nel salvadanaio");
         }
 
         // Update amounts
@@ -94,11 +100,11 @@ public class SavingsGoalService {
     @Transactional
     public void deleteGoal(Long goalId) {
         SavingsGoal goal = savingsGoalRepository.findById(goalId)
-                .orElseThrow(() -> new RuntimeException("Obiettivo non trovato"));
+                .orElseThrow(() -> new IllegalArgumentException(GOAL_NOT_FOUND_MSG));
 
         // If there are still funds, move them back to account
         if (goal.getCurrentAmount().compareTo(BigDecimal.ZERO) > 0) {
-            withdraw(goalId, goal.getCurrentAmount());
+            performWithdraw(goalId, goal.getCurrentAmount());
         }
 
         savingsGoalRepository.delete(goal);

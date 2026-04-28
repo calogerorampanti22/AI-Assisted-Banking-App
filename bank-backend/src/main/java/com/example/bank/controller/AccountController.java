@@ -46,7 +46,7 @@ public class AccountController {
         }
 
         Account account = accountRepository.findByUserId(user.getId())
-                .orElseThrow(() -> new RuntimeException("Account not found"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Account not found"));
 
         java.util.Map<String, Object> userMap = new java.util.HashMap<>();
         userMap.put("firstName", user.getFirstName());

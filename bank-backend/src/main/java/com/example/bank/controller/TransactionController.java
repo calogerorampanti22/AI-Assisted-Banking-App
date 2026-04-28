@@ -35,10 +35,13 @@ public class TransactionController {
     }
 
     private Account getCurrentUserAccount() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !(auth.getPrincipal() instanceof UserDetails userDetails)) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Utente non autenticato");
+        }
         User user = userService.findByEmail(userDetails.getUsername());
         return accountRepository.findByUserId(user.getId())
-                .orElseThrow(() -> new RuntimeException("Account non trovato"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Account non trovato"));
     }
 
     @GetMapping
@@ -57,7 +60,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<?> performTransfer(@RequestBody TransferRequest transferRequest) {
+    public ResponseEntity<Object> performTransfer(@RequestBody TransferRequest transferRequest) {
         try {
             Account account = getCurrentUserAccount();
             Transaction transaction = transactionService.processTransfer(account.getId(), transferRequest);
@@ -68,7 +71,7 @@ public class TransactionController {
     }
 
     @PostMapping("/pay-bill")
-    public ResponseEntity<?> payBill(@RequestBody BillPaymentRequest billPaymentRequest) {
+    public ResponseEntity<Object> payBill(@RequestBody BillPaymentRequest billPaymentRequest) {
         try {
             Account account = getCurrentUserAccount();
             Transaction transaction = transactionService.processBillPayment(account.getId(), billPaymentRequest);
