@@ -30,6 +30,7 @@ const Transaction: React.FC<TransactionProps> = ({ transactions, onTransactionCl
                         <th style={{ padding: '1rem' }}>Data</th>
                         <th style={{ padding: '1rem' }}>Descrizione</th>
                         <th style={{ padding: '1rem', textAlign: 'right' }}>Importo</th>
+                        {onTransactionClick && <th style={{ padding: '1rem' }}></th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -38,16 +39,8 @@ const Transaction: React.FC<TransactionProps> = ({ transactions, onTransactionCl
                             key={t.id}
                             style={{
                                 borderBottom: '1px solid var(--glass-border)',
-                                cursor: onTransactionClick ? 'pointer' : 'default',
                                 transition: 'background-color 0.2s',
                             }}
-                            onMouseEnter={(e) => {
-                                if (onTransactionClick) e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                            }}
-                            onMouseLeave={(e) => {
-                                if (onTransactionClick) e.currentTarget.style.backgroundColor = 'transparent';
-                            }}
-                            onClick={() => onTransactionClick && onTransactionClick(t)}
                         >
                             <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{new Date(t.date).toLocaleString()}</td>
                             <td style={{ padding: '1rem' }}>
@@ -65,6 +58,25 @@ const Transaction: React.FC<TransactionProps> = ({ transactions, onTransactionCl
                             <td style={{ padding: '1rem', textAlign: 'right', fontWeight: 600, color: t.type === 'IN' ? 'var(--success)' : 'var(--danger)' }}>
                                 {t.type === 'IN' ? '+' : '-'} €{t.amount.toFixed(2)}
                             </td>
+                            {onTransactionClick && (
+                                <td style={{ padding: '1rem', textAlign: 'right' }}>
+                                    <button
+                                        type="button"
+                                        className="btn btn-sm"
+                                        onClick={() => onTransactionClick(t)}
+                                        style={{ 
+                                            background: 'rgba(255,255,255,0.05)', 
+                                            border: '1px solid var(--glass-border)', 
+                                            color: 'var(--text-primary)',
+                                            fontSize: '0.75rem',
+                                            padding: '4px 8px'
+                                        }}
+                                        aria-label="Vedi dettagli"
+                                    >
+                                        Dettagli
+                                    </button>
+                                </td>
+                            )}
                         </tr>
                     )) : (
                         <tr>

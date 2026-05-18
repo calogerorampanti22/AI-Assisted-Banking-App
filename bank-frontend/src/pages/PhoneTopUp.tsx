@@ -19,7 +19,7 @@ const PhoneTopUp: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!amount) {
             setError('Seleziona un importo.');
@@ -57,7 +57,7 @@ const PhoneTopUp: React.FC = () => {
         return (
             <div style={{ maxWidth: '600px', margin: '4rem auto', textAlign: 'center' }}>
                 <div className="glass-panel">
-                    <i className="bi bi-check-circle-fill" style={{ fontSize: '4rem', color: 'var(--success)', marginBottom: '1.5rem', display: 'block' }}></i>
+                    <span className="bi bi-check-circle-fill" style={{ fontSize: '4rem', color: 'var(--success)', marginBottom: '1.5rem', display: 'block' }}></span>
                     <h2>Ricarica Effettuata!</h2>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                         L'importo di €{amount?.toFixed(2)} è stato accreditato sul numero {phoneNumber}.
@@ -76,8 +76,9 @@ const PhoneTopUp: React.FC = () => {
                 <div className="glass-panel">
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                         <div>
-                            <label className="form-label">Numero di Telefono</label>
+                            <label className="form-label" htmlFor="phoneNumber">Numero di Telefono</label>
                             <input
+                                id="phoneNumber"
                                 type="tel"
                                 className="form-control"
                                 placeholder="333 1234567"
@@ -88,8 +89,9 @@ const PhoneTopUp: React.FC = () => {
                         </div>
 
                         <div>
-                            <label className="form-label">Operatore</label>
+                            <label className="form-label" htmlFor="operator">Operatore</label>
                             <select
+                                id="operator"
                                 className="form-control"
                                 value={operator}
                                 onChange={(e) => setOperator(e.target.value)}
@@ -103,7 +105,7 @@ const PhoneTopUp: React.FC = () => {
                         </div>
 
                         <div>
-                            <label className="form-label">Importo</label>
+                            <span className="form-label" style={{ display: 'block', marginBottom: '0.5rem' }}>Importo</span>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
                                 {amounts.map(amt => (
                                     <button
@@ -139,9 +141,10 @@ const PhoneTopUp: React.FC = () => {
                         </div>
 
                         {saveContact && (
-                            <div>
-                                <label className="form-label">Nome Contatto</label>
+                             <div>
+                                <label className="form-label" htmlFor="contactName">Nome Contatto</label>
                                 <input
+                                    id="contactName"
                                     type="text"
                                     className="form-control"
                                     placeholder="Es: Mamma, Mio numero..."
@@ -167,13 +170,13 @@ const PhoneTopUp: React.FC = () => {
 
                 <div className="glass-panel">
                     <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem' }}>Contatti Salvati</h3>
-                    {loadingContacts ? (
-                        <p>Caricamento...</p>
-                    ) : contacts.length > 0 ? (
+                    {loadingContacts && <p>Caricamento...</p>}
+                    {!loadingContacts && contacts.length > 0 && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             {contacts.map(contact => (
-                                <div
+                                <button
                                     key={contact.id}
+                                    type="button"
                                     onClick={() => selectContact(contact)}
                                     style={{
                                         padding: '1rem',
@@ -181,7 +184,10 @@ const PhoneTopUp: React.FC = () => {
                                         background: 'rgba(255,255,255,0.03)',
                                         border: '1px solid var(--glass-border)',
                                         cursor: 'pointer',
-                                        transition: 'background 0.2s'
+                                        transition: 'background 0.2s',
+                                        textAlign: 'left',
+                                        width: '100%',
+                                        color: 'inherit'
                                     }}
                                     onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.07)'}
                                     onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
@@ -190,10 +196,11 @@ const PhoneTopUp: React.FC = () => {
                                     <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
                                         {contact.phoneNumber} • {contact.operator}
                                     </div>
-                                </div>
+                                </button>
                             ))}
                         </div>
-                    ) : (
+                    )}
+                    {!loadingContacts && contacts.length === 0 && (
                         <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>
                             Nessun contatto salvato.
                         </p>

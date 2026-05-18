@@ -9,10 +9,10 @@ const LoginHistory: React.FC = () => {
 
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 1rem' }}>
-            <div className="glass-panel">
+            <section className="glass-panel" aria-label="Cronologia Accessi">
                 <h2 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <i className="bi bi-shield-lock-fill" style={{ color: 'var(--success)' }}></i>
-                    Cronologia Accessi
+                    <span className="bi bi-shield-lock-fill" style={{ color: 'var(--success)' }}></span>
+                    {' '}Cronologia Accessi
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                     Monitora gli ultimi accessi al tuo account per garantire la massima sicurezza.
@@ -66,7 +66,7 @@ const LoginHistory: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };

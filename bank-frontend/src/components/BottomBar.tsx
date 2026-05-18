@@ -30,23 +30,23 @@ const BottomBar: React.FC = () => {
     return (
         <div className={`bottom-bar ${isVisible ? '' : 'bottom-bar-hidden'}`}>
             <Link to="/dashboard" className={`bottom-bar-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
-                <i className="bi bi-house-door"></i>
+                <span className="bi bi-house-door"></span>
                 <span>Home</span>
             </Link>
             <Link to="/transfer" className={`bottom-bar-item ${location.pathname === '/transfer' ? 'active' : ''}`}>
-                <i className="bi bi-arrow-left-right"></i>
+                <span className="bi bi-arrow-left-right"></span>
                 <span>Bonifico</span>
             </Link>
             <Link to="/payments" className={`bottom-bar-item ${location.pathname === '/payments' ? 'active' : ''}`}>
-                <i className="bi bi-receipt"></i>
+                <span className="bi bi-receipt"></span>
                 <span>Utenze</span>
             </Link>
             <Link to="/savings-goals" className={`bottom-bar-item ${location.pathname === '/savings-goals' ? 'active' : ''}`}>
-                <i className="bi bi-piggy-bank"></i>
+                <span className="bi bi-piggy-bank"></span>
                 <span>Salvadanai</span>
             </Link>
             <Link to="/profile" className={`bottom-bar-item ${location.pathname === '/profile' ? 'active' : ''}`}>
-                <i className="bi bi-person"></i>
+                <span className="bi bi-person"></span>
                 <span>Profilo</span>
             </Link>
         </div>

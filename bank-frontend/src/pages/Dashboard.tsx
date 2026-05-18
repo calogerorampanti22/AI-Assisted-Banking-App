@@ -122,7 +122,10 @@ const Dashboard: React.FC = () => {
             <TransactionModal
                 transaction={selectedTransaction}
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={() => {
+                    setIsModalOpen(false);
+                    setSelectedTransaction(null);
+                }}
             />
 
             {/* Request Card Modal */}
@@ -138,8 +141,9 @@ const Dashboard: React.FC = () => {
                             <button onClick={() => setIsRequestCardModalOpen(false)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: 'var(--text-primary)' }}>&times;</button>
                         </div>
                         <div style={{ marginBottom: '1rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem' }}>Tipo di Carta</label>
+                            <label htmlFor="cardType" style={{ display: 'block', marginBottom: '0.5rem' }}>Tipo di Carta</label>
                             <select
+                                id="cardType"
                                 className="form-control"
                                 value={newCardType}
                                 onChange={(e) => setNewCardType(e.target.value)}
@@ -151,8 +155,9 @@ const Dashboard: React.FC = () => {
                             </select>
                         </div>
                         <div style={{ marginBottom: '1.5rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem' }}>Circuito</label>
+                            <label htmlFor="cardNetwork" style={{ display: 'block', marginBottom: '0.5rem' }}>Circuito</label>
                             <select
+                                id="cardNetwork"
                                 className="form-control"
                                 value={newCardNetwork}
                                 onChange={(e) => setNewCardNetwork(e.target.value)}

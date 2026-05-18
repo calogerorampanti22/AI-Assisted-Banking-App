@@ -21,7 +21,7 @@ const CreditCard: React.FC<CreditCardProps> = ({ card, onToggleFreeze }) => {
     const displayPan = () => {
         if (!card.pan) return '';
         if (showPan) {
-            return card.pan.replace(/(.{4})/g, '$1 ').trim();
+            return card.pan.replaceAll(/(.{4})/g, '$1 ').trim();
         } else {
             const last4 = card.pan.substring(card.pan.length - 4);
             return `•••• •••• •••• ${last4}`;

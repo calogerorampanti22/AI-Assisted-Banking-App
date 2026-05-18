@@ -13,11 +13,10 @@ const Transfer: React.FC = () => {
         recipientLastName: ''
     });
     const [message, setMessage] = useState({ type: '', text: '' });
-    const [showAddModal, setShowAddModal] = useState(false);
     const [savingBeneficiary, setSavingBeneficiary] = useState(false);
     const navigate = useNavigate();
 
-    const { beneficiaries, addBeneficiary, deleteBeneficiary, error: beneficiaryError } = useBeneficiaries();
+    const { beneficiaries, addBeneficiary, deleteBeneficiary } = useBeneficiaries();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,7 +41,7 @@ const Transfer: React.FC = () => {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             await api.post('/transactions/transfer', formData);
@@ -82,21 +81,31 @@ const Transfer: React.FC = () => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                padding: '0.75rem 1rem',
+                                padding: '0',
                                 background: 'rgba(255,255,255,0.05)',
                                 borderRadius: '8px',
                                 border: '1px solid var(--glass-border)',
-                                cursor: 'pointer',
-                                transition: 'background 0.2s'
-                            }}
-                                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-                                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
-                            >
-                                <div onClick={() => handleSelectBeneficiary(b)} style={{ flex: 1 }}>
+                                transition: 'background 0.2s',
+                                overflow: 'hidden'
+                            }}>
+                                <button
+                                    type="button"
+                                    onClick={() => handleSelectBeneficiary(b)}
+                                    style={{
+                                        flex: 1,
+                                        background: 'none',
+                                        border: 'none',
+                                        color: 'inherit',
+                                        textAlign: 'left',
+                                        padding: '0.75rem 1rem',
+                                        cursor: 'pointer'
+                                    }}
+                                >
                                     <div style={{ fontWeight: '600' }}>{b.firstName} {b.lastName}</div>
                                     <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{b.iban}</div>
-                                </div>
+                                </button>
                                 <button
+                                    type="button"
                                     onClick={() => handleDeleteBeneficiary(b.id)}
                                     style={{
                                         background: 'none',
@@ -142,8 +151,9 @@ const Transfer: React.FC = () => {
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label className="form-label">Importo (€)</label>
+                        <label className="form-label" htmlFor="amount">Importo (€)</label>
                         <input
+                            id="amount"
                             type="number"
                             step="0.01"
                             className="form-control"
@@ -157,8 +167,9 @@ const Transfer: React.FC = () => {
 
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Nome Beneficiario</label>
+                            <label className="form-label" htmlFor="recipientFirstName">Nome Beneficiario</label>
                             <input
+                                id="recipientFirstName"
                                 type="text"
                                 className="form-control"
                                 name="recipientFirstName"
@@ -168,8 +179,9 @@ const Transfer: React.FC = () => {
                             />
                         </div>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Cognome Beneficiario</label>
+                            <label className="form-label" htmlFor="recipientLastName">Cognome Beneficiario</label>
                             <input
+                                id="recipientLastName"
                                 type="text"
                                 className="form-control"
                                 name="recipientLastName"
@@ -181,8 +193,9 @@ const Transfer: React.FC = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">IBAN Destinatario</label>
+                        <label className="form-label" htmlFor="relatedAccountNumber">IBAN Destinatario</label>
                         <input
+                            id="relatedAccountNumber"
                             type="text"
                             className="form-control"
                             name="relatedAccountNumber"
@@ -194,8 +207,9 @@ const Transfer: React.FC = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Descrizione / Causale</label>
+                        <label className="form-label" htmlFor="description">Descrizione / Causale</label>
                         <input
+                            id="description"
                             type="text"
                             className="form-control"
                             name="description"

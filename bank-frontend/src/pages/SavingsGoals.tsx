@@ -12,9 +12,9 @@ const SavingsGoals: React.FC = () => {
     const [actionAmount, setActionAmount] = useState('');
     const [actionType, setActionType] = useState<'deposit' | 'withdraw' | null>(null);
 
-    const handleCreate = async (e: React.FormEvent) => {
+    const handleCreate = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const success = await createGoal(newName, parseFloat(newTarget));
+        const success = await createGoal(newName, Number.parseFloat(newTarget));
         if (success) {
             setShowCreateModal(false);
             setNewName('');
@@ -22,11 +22,11 @@ const SavingsGoals: React.FC = () => {
         }
     };
 
-    const handleAction = async (e: React.FormEvent) => {
+    const handleAction = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!selectedGoal || !actionType) return;
 
-        const amount = parseFloat(actionAmount);
+        const amount = Number.parseFloat(actionAmount);
         const success = actionType === 'deposit'
             ? await deposit(selectedGoal.id, amount)
             : await withdraw(selectedGoal.id, amount);
@@ -39,7 +39,7 @@ const SavingsGoals: React.FC = () => {
     };
 
     const confirmDelete = async (id: number) => {
-        if (window.confirm("Sei sicuro di voler eliminare questo salvadanaio? I fondi rimanenti verranno riportati sul conto principale.")) {
+        if (globalThis.confirm("Sei sicuro di voler eliminare questo salvadanaio? I fondi rimanenti verranno riportati sul conto principale.")) {
             await deleteGoal(id);
         }
     };
@@ -55,8 +55,8 @@ const SavingsGoals: React.FC = () => {
                     <p style={{ color: 'var(--text-secondary)' }}>Gestisci i tuoi obiettivi di risparmio e accantona fondi.</p>
                 </div>
                 <button className="btn btn-primary" onClick={() => setShowCreateModal(true)}>
-                    <i className="bi bi-plus-lg" style={{ marginRight: '0.5rem' }}></i>
-                    Nuovo Obiettivo
+                    <span className="bi bi-plus-lg" style={{ marginRight: '0.5rem' }} />
+                    {'Nuovo Obiettivo'}
                 </button>
             </div>
 
@@ -71,7 +71,7 @@ const SavingsGoals: React.FC = () => {
                                     onClick={() => confirmDelete(goal.id)}
                                     style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '5px' }}
                                 >
-                                    <i className="bi bi-trash"></i>
+                                    <span className="bi bi-trash"></span>
                                 </button>
                             </div>
 
@@ -121,7 +121,7 @@ const SavingsGoals: React.FC = () => {
                     );
                 }) : (
                     <div className="glass-panel" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem 2rem' }}>
-                        <i className="bi bi-piggy-bank" style={{ fontSize: '4rem', color: 'var(--text-secondary)', opacity: 0.3, marginBottom: '1.5rem', display: 'block' }}></i>
+                        <span className="bi bi-piggy-bank" style={{ fontSize: '4rem', color: 'var(--text-secondary)', opacity: 0.3, marginBottom: '1.5rem', display: 'block' }}></span>
                         <h3>Nessun salvadanaio creato</h3>
                         <p style={{ color: 'var(--text-secondary)' }}>Inizia a risparmiare per i tuoi sogni creando il tuo primo obiettivo.</p>
                     </div>
@@ -135,8 +135,9 @@ const SavingsGoals: React.FC = () => {
                         <h3 style={{ marginBottom: '1.5rem' }}>Nuovo Salvadanaio</h3>
                         <form onSubmit={handleCreate}>
                             <div className="mb-3">
-                                <label className="form-label">Nome Obiettivo</label>
+                                <label className="form-label" htmlFor="newName">Nome Obiettivo</label>
                                 <input
+                                    id="newName"
                                     type="text"
                                     className="form-control"
                                     placeholder="Es: Vacanza in montagna"
@@ -146,8 +147,9 @@ const SavingsGoals: React.FC = () => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Somma da Raggiungere (€)</label>
+                                <label className="form-label" htmlFor="newTarget">Somma da Raggiungere (€)</label>
                                 <input
+                                    id="newTarget"
                                     type="number"
                                     step="0.01"
                                     className="form-control"
@@ -174,8 +176,9 @@ const SavingsGoals: React.FC = () => {
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{selectedGoal.name}</p>
                         <form onSubmit={handleAction}>
                             <div className="mb-3">
-                                <label className="form-label">Importo (€)</label>
+                                <label className="form-label" htmlFor="actionAmount">Importo (€)</label>
                                 <input
+                                    id="actionAmount"
                                     type="number"
                                     step="0.01"
                                     className="form-control"

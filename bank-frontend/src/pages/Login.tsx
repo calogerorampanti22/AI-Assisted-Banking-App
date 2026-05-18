@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../api';
+import PasswordField from '../components/PasswordField';
 
 interface LoginProps {
     setIsAuthenticated: (isAuthenticated: boolean) => void;
@@ -9,11 +10,10 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await api.post('/auth/login', { email, password });
@@ -22,6 +22,7 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
             setIsAuthenticated(true);
             navigate('/dashboard');
         } catch (err) {
+            console.error('Login error:', err);
             setError('Email o password non corretti.');
         }
     };
@@ -35,8 +36,9 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
 
                 <form onSubmit={handleLogin}>
                     <div className="form-group">
-                        <label className="form-label">Email</label>
+                        <label className="form-label" htmlFor="email">Email</label>
                         <input
+                            id="email"
                             type="email"
                             className="form-control"
                             value={email}
@@ -44,38 +46,15 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
                             required
                         />
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">Password</label>
-                        <div style={{ position: 'relative' }}>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                className="form-control"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                style={{ paddingRight: '2.5rem' }}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                style={{
-                                    position: 'absolute',
-                                    right: '10px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    background: 'none',
-                                    border: 'none',
-                                    color: 'var(--text-secondary)',
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-                            </button>
-                        </div>
-                    </div>
+                    
+                    <PasswordField
+                        id="password"
+                        label="Password"
+                        value={password}
+                        onChange={setPassword}
+                        required
+                    />
+
                     <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
                         Accedi
                     </button>

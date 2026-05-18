@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../api';
+import PasswordField from '../components/PasswordField';
 
 const Register: React.FC = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -24,7 +23,7 @@ const Register: React.FC = () => {
         "", "Italia", "Stati Uniti", "Gran Bretagna", "Francia", "Germania", "Spagna", "Canada", "Australia", "Other"
     ];
 
-    const handleRegister = async (e: React.FormEvent) => {
+    const handleRegister = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
         setSuccess('');
@@ -46,7 +45,7 @@ const Register: React.FC = () => {
             }
         }
 
-        if (parseFloat(initialDeposit) < 0) {
+        if (Number.parseFloat(initialDeposit) < 0) {
             setError('Il deposito iniziale non può essere negativo.');
             return;
         }
@@ -62,9 +61,9 @@ const Register: React.FC = () => {
                 birthPlace,
                 idCardNumber,
                 taxId,
-                initialDeposit: parseFloat(initialDeposit) || 0
+                initialDeposit: Number.parseFloat(initialDeposit) || 0
             });
-            setSuccess('Registrazione avvenuta con successo! Reindirizzamento in corso...');
+            setSuccess('Registrazione avvenuca con successo! Reindirizzamento in corso...');
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
@@ -84,8 +83,9 @@ const Register: React.FC = () => {
                 <form onSubmit={handleRegister}>
 
                     <div className="form-group">
-                        <label className="form-label">Email</label>
+                        <label className="form-label" htmlFor="email">Email</label>
                         <input
+                            id="email"
                             type="email"
                             className="form-control"
                             value={email}
@@ -94,78 +94,27 @@ const Register: React.FC = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">Password</label>
-                        <div style={{ position: 'relative' }}>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                className="form-control"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                minLength={6}
-                                style={{ paddingRight: '2.5rem' }}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                style={{
-                                    position: 'absolute',
-                                    right: '10px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    background: 'none',
-                                    border: 'none',
-                                    color: 'var(--text-secondary)',
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-                            </button>
-                        </div>
-                    </div>
+                    <PasswordField
+                        id="password"
+                        label="Password"
+                        value={password}
+                        onChange={setPassword}
+                        required
+                    />
 
-                    <div className="form-group">
-                        <label className="form-label">Conferma Password</label>
-                        <div style={{ position: 'relative' }}>
-                            <input
-                                type={showConfirmPassword ? "text" : "password"}
-                                className="form-control"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                                minLength={6}
-                                style={{ paddingRight: '2.5rem' }}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                style={{
-                                    position: 'absolute',
-                                    right: '10px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    background: 'none',
-                                    border: 'none',
-                                    color: 'var(--text-secondary)',
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <i className={showConfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-                            </button>
-                        </div>
-                    </div>
+                    <PasswordField
+                        id="confirmPassword"
+                        label="Conferma Password"
+                        value={confirmPassword}
+                        onChange={setConfirmPassword}
+                        required
+                    />
 
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Nome</label>
+                            <label className="form-label" htmlFor="firstName">Nome</label>
                             <input
+                                id="firstName"
                                 type="text"
                                 className="form-control"
                                 value={firstName}
@@ -174,8 +123,9 @@ const Register: React.FC = () => {
                             />
                         </div>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Cognome</label>
+                            <label className="form-label" htmlFor="lastName">Cognome</label>
                             <input
+                                id="lastName"
                                 type="text"
                                 className="form-control"
                                 value={lastName}
@@ -184,23 +134,26 @@ const Register: React.FC = () => {
                             />
                         </div>
                     </div>
+
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Nazionalità</label>
+                            <label className="form-label" htmlFor="nationality">Nazionalità</label>
                             <select
+                                id="nationality"
                                 className="form-control"
                                 value={nationality}
                                 onChange={(e) => setNationality(e.target.value)}
                                 required
                             >
-                                {nationalities.map(nat => (
-                                    <option key={nat} value={nat}>{nat === "" ? "Seleziona nazionalità" : nat}</option>
+                                {nationalities.map((n) => (
+                                    <option key={n} value={n}>{n || "Seleziona..."}</option>
                                 ))}
                             </select>
                         </div>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Data di nascita</label>
+                            <label className="form-label" htmlFor="birthday">Data di nascita</label>
                             <input
+                                id="birthday"
                                 type="date"
                                 className="form-control"
                                 value={birthday}
@@ -208,9 +161,13 @@ const Register: React.FC = () => {
                                 required
                             />
                         </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '1rem' }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Luogo di nascita</label>
+                            <label className="form-label" htmlFor="birthPlace">Luogo di nascita</label>
                             <input
+                                id="birthPlace"
                                 type="text"
                                 className="form-control"
                                 value={birthPlace}
@@ -218,11 +175,10 @@ const Register: React.FC = () => {
                                 required
                             />
                         </div>
-                    </div>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">ID Carta d'Identità</label>
+                            <label className="form-label" htmlFor="idCardNumber">Numero Documento</label>
                             <input
+                                id="idCardNumber"
                                 type="text"
                                 className="form-control"
                                 value={idCardNumber}
@@ -230,9 +186,13 @@ const Register: React.FC = () => {
                                 required
                             />
                         </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '1rem' }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label className="form-label">Codice Fiscale</label>
+                            <label className="form-label" htmlFor="taxId">Codice Fiscale</label>
                             <input
+                                id="taxId"
                                 type="text"
                                 className="form-control"
                                 value={taxId}
@@ -240,19 +200,21 @@ const Register: React.FC = () => {
                                 required
                             />
                         </div>
+                        <div className="form-group" style={{ flex: 1 }}>
+                            <label className="form-label" htmlFor="initialDeposit">Deposito iniziale (€)</label>
+                            <input
+                                id="initialDeposit"
+                                type="number"
+                                className="form-control"
+                                value={initialDeposit}
+                                onChange={(e) => setInitialDeposit(e.target.value)}
+                                required
+                                min="0"
+                                step="0.01"
+                            />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">Deposito iniziale (€)</label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            value={initialDeposit}
-                            onChange={(e) => setInitialDeposit(e.target.value)}
-                            required
-                            min="0"
-                            step="0.01"
-                        />
-                    </div>
+
                     <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
                         Registrati
                     </button>

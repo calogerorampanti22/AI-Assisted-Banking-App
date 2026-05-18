@@ -1,0 +1,51 @@
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/calor/Banking App/bank-frontend[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32mÔ£ô[39m src/api.test.ts [2m([22m[2m2 tests[22m[2m)[22m[90m 15[2mms[22m[39m
+ [32mÔ£ô[39m src/pages/Login.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[90m 258[2mms[22m[39m
+ [32mÔ£ô[39m src/App.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[90m 108[2mms[22m[39m
+ [32mÔ£ô[39m src/pages/PagesBulk.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 405[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m18 passed[39m[22m[90m (18)[39m
+[2m   Start at [22m 15:01:13
+[2m   Duration [22m 6.60s[2m (transform 1.27s, setup 1.59s, collect 6.53s, tests 787ms, environment 5.07s, prepare 1.60s)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   66.19 |    56.86 |   24.28 |   66.19 |                   
+ bank-frontend     |       0 |        0 |       0 |       0 |                   
+  ...nsactions.cjs |       0 |        0 |       0 |       0 | 1-25              
+ bank-frontend/src |   90.65 |    96.96 |      50 |   90.65 |                   
+  App.tsx          |     100 |      100 |     100 |     100 |                   
+  api.ts           |     100 |      100 |     100 |     100 |                   
+  main.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...src/components |   40.34 |    29.62 |   41.66 |   40.34 |                   
+  BottomBar.tsx    |    82.6 |    33.33 |      50 |    82.6 | 11-21             
+  CreditCard.tsx   |    3.24 |      100 |       0 |    3.24 | 12-183            
+  Navbar.tsx       |   78.26 |      100 |      50 |   78.26 | 12-16             
+  ...dingChart.tsx |   26.86 |    66.66 |      50 |   26.86 | 20-31,36-37,50-90 
+  Transaction.tsx  |   35.82 |       50 |   33.33 |   35.82 | 11-17,20-23,37-69 
+  ...tionModal.tsx |    79.8 |     8.33 |      50 |    79.8 | ...,35-37,110-113 
+ ...tend/src/hooks |   56.87 |    64.51 |   54.54 |   56.87 |                   
+  useAccounts.ts   |   58.58 |    53.33 |    62.5 |   58.58 | ...28-141,144-154 
+  ...eficiaries.ts |   56.09 |       75 |   33.33 |   56.09 | 23,34-42,45-52    
+  ...ginHistory.ts |    91.3 |       75 |     100 |    91.3 | 22-23             
+  usePhoneTopUp.ts |   61.11 |       75 |   66.66 |   61.11 | 31-32,39-50       
+  ...vingsGoals.ts |   39.68 |       75 |   33.33 |   39.68 | ...50,53-61,64-72 
+ ...tend/src/pages |   74.02 |       50 |   15.53 |   74.02 |                   
+  Bollettino.tsx   |   71.22 |     12.5 |   11.11 |   71.22 | 20-31,34-61,88-90 
+  Dashboard.tsx    |   57.14 |    58.82 |   11.11 |   57.14 | ...,75-91,130-172 
+  Login.tsx        |     100 |      100 |     100 |     100 |                   
+  LoginHistory.tsx |   93.65 |    66.66 |     100 |   93.65 | 60-64             
+  PagoPA.tsx       |   71.22 |     12.5 |   11.11 |   71.22 | 20-31,34-61,88-90 
+  Payments.tsx     |     100 |      100 |      10 |     100 |                   
+  PhoneTopUp.tsx   |   59.65 |    41.66 |    12.5 |   59.65 | ...42-152,173-195 
+  Profile.tsx      |   80.37 |       48 |      20 |   80.37 | ...55-157,160-162 
+  Register.tsx     |    82.8 |       40 |    6.66 |    82.8 | 28-74             
+  SavingsGoals.tsx |   48.27 |       40 |    7.69 |   48.27 | ...33-166,171-197 
+  Transfer.tsx     |   76.88 |       75 |    7.14 |   76.88 | ...,57-70,131-140 
+-------------------|---------|----------|---------|---------|-------------------

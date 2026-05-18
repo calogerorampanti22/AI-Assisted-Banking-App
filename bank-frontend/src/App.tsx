@@ -35,11 +35,11 @@ const App: React.FC = () => {
                 <Routes>
                     <Route
                         path="/login"
-                        element={!isAuthenticated ? <Login setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/dashboard" />}
+                        element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />}
                     />
                     <Route
                         path="/register"
-                        element={!isAuthenticated ? <Register /> : <Navigate to="/dashboard" />}
+                        element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />}
                     />
                     <Route
                         path="/dashboard"

@@ -20,6 +20,7 @@ export const useBeneficiaries = () => {
             const res = await api.get<Beneficiary[]>('/beneficiaries');
             setBeneficiaries(res.data);
         } catch (err) {
+            console.error('Fetch beneficiaries error:', err);
             setError('Impossibile caricare la rubrica');
         } finally {
             setLoading(false);

@@ -61,7 +61,7 @@ const Profile: React.FC = () => {
         fetchProfile();
     }, []);
 
-    const handlePasswordChange = async (e: React.FormEvent) => {
+    const handlePasswordChange = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         setPasswordError(null);
         setPasswordSuccess(null);
@@ -79,7 +79,7 @@ const Profile: React.FC = () => {
         setIsUpdating(true);
 
         try {
-            const res = await api.put('/users/me/password', {
+            await api.put('/users/me/password', {
                 oldPassword,
                 newPassword
             });
@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
             setConfirmPassword('');
         } catch (err: any) {
             console.error(err);
-            if (err.response && err.response.data && err.response.data.error) {
+            if (err.response?.data?.error) {
                 setPasswordError(err.response.data.error);
             } else {
                 setPasswordError("Errore durante l'aggiornamento della password. Verifica la vecchia password e riprova.");
@@ -144,8 +144,8 @@ const Profile: React.FC = () => {
                         </div>
                     )}
                     <div style={{ marginTop: 'auto', paddingTop: '2rem', color: 'var(--text-secondary)', fontSize: '0.875rem', textAlign: 'center' }}>
-                        <i className="bi bi-info-circle" style={{ marginRight: '0.5rem' }}></i>
-                        Per modificare questi dati, contatta l'assistenza clienti al numero verde o recati in filiale.
+                        <span className="bi bi-info-circle" style={{ marginRight: '0.5rem' }}></span>
+                        {' '}Per modificare questi dati, contatta l'assistenza clienti al numero verde o recati in filiale.
                     </div>
                 </div>
 
@@ -164,9 +164,10 @@ const Profile: React.FC = () => {
 
                     <form onSubmit={handlePasswordChange} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: 1 }}>
                         <div>
-                            <label className="form-label">Vecchia Password</label>
+                            <label className="form-label" htmlFor="oldPassword">Vecchia Password</label>
                             <div style={{ position: 'relative' }}>
                                 <input
+                                    id="oldPassword"
                                     type={showOldPassword ? "text" : "password"}
                                     className="form-control"
                                     value={oldPassword}
@@ -179,14 +180,15 @@ const Profile: React.FC = () => {
                                     onClick={() => setShowOldPassword(!showOldPassword)}
                                     style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <i className={showOldPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+                                    <span className={showOldPassword ? "bi bi-eye-slash" : "bi bi-eye"}></span>
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <label className="form-label">Nuova Password</label>
+                            <label className="form-label" htmlFor="newPassword">Nuova Password</label>
                             <div style={{ position: 'relative' }}>
                                 <input
+                                    id="newPassword"
                                     type={showNewPassword ? "text" : "password"}
                                     className="form-control"
                                     value={newPassword}
@@ -200,14 +202,15 @@ const Profile: React.FC = () => {
                                     onClick={() => setShowNewPassword(!showNewPassword)}
                                     style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <i className={showNewPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+                                    <span className={showNewPassword ? "bi bi-eye-slash" : "bi bi-eye"}></span>
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <label className="form-label">Conferma Nuova Password</label>
+                            <label className="form-label" htmlFor="confirmPassword">Conferma Nuova Password</label>
                             <div style={{ position: 'relative' }}>
                                 <input
+                                    id="confirmPassword"
                                     type={showConfirmPassword ? "text" : "password"}
                                     className="form-control"
                                     value={confirmPassword}
@@ -221,7 +224,7 @@ const Profile: React.FC = () => {
                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                     style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    <i className={showConfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+                                    <span className={showConfirmPassword ? "bi bi-eye-slash" : "bi bi-eye"}></span>
                                 </button>
                             </div>
                         </div>

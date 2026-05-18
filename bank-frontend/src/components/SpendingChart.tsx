@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Transaction } from '../hooks/useAccounts';
 
 interface SpendingChartProps {
@@ -32,9 +32,10 @@ const SpendingChart: React.FC<SpendingChartProps> = ({ transactions }) => {
         }, {} as Record<string, number>);
 
         // 3. Format data for Recharts
-        return Object.entries(expensesByCategory).map(([name, value]) => ({
+        return Object.entries(expensesByCategory).map(([name, value], index) => ({
             name,
-            value
+            value,
+            fill: COLORS[index % COLORS.length]
         })).sort((a, b) => b.value - a.value); // Order by highest expense
 
     }, [transactions]);
@@ -50,8 +51,8 @@ const SpendingChart: React.FC<SpendingChartProps> = ({ transactions }) => {
     return (
         <div className="glass-panel" style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h3 style={{ width: '100%', textAlign: 'left', marginBottom: '1rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.5rem' }}>
-                <i className="bi bi-pie-chart-fill" style={{ marginRight: '10px', color: 'var(--primary-light)' }}></i>
-                Analisi Spese
+                <span className="bi bi-pie-chart-fill" style={{ marginRight: '10px', color: 'var(--primary-light)' }}></span>
+                {' '}Analisi Spese
             </h3>
 
             <div style={{ width: '100%', height: 300 }}>
@@ -67,9 +68,6 @@ const SpendingChart: React.FC<SpendingChartProps> = ({ transactions }) => {
                             dataKey="value"
                             stroke="none"
                         >
-                            {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
                         </Pie>
                         <Tooltip
                             formatter={(value: any) => `€${Number(value || 0).toFixed(2)}`}
